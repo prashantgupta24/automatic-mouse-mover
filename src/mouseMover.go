@@ -41,7 +41,7 @@ func moveMouse(comm chan struct{}, quit chan struct{}) {
 			movePixel *= -1
 		case <-comm:
 			isIdle = false
-			fmt.Println("val received: ", isIdle)
+			//fmt.Println("val received: ", isIdle)
 		case <-quit:
 			return
 		}
@@ -72,7 +72,19 @@ func isMouseClicked(comm chan struct{}) {
 		for {
 			mleft := robotgo.AddEvent("mleft")
 			if mleft == 0 {
-				//fmt.Println("mleft clicked")
+				fmt.Println("mleft clicked")
+				time.Sleep(100 * time.Millisecond)
+				comm <- struct{}{}
+			}
+		}
+	}()
+
+	go func() {
+		for {
+			mright := robotgo.AddEvent("mright")
+			if mright == 0 {
+				fmt.Println("mright clicked")
+				time.Sleep(100 * time.Millisecond)
 				comm <- struct{}{}
 			}
 		}

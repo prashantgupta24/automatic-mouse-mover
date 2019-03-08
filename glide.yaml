@@ -1,0 +1,4 @@
+package: .
+import:
+- package: github.com/go-vgo/robotgo
+  version: ~0.70.0

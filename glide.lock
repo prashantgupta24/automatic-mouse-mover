@@ -1,0 +1,54 @@
+hash: 2f203324a3ca8f6d3a3e571dc0393f79835b0ea6194850ddc6b03e9355dfddcb
+updated: 2019-03-07T18:33:39.501851-08:00
+imports:
+- name: github.com/BurntSushi/xgb
+  version: 27f122750802c950b2c869a5b63dafcf590ced95
+  subpackages:
+  - shape
+  - xinerama
+  - xproto
+- name: github.com/BurntSushi/xgbutil
+  version: f7c97cef3b4e6c88280a5a7091c3314e815ca243
+  subpackages:
+  - ewmh
+  - xevent
+  - xprop
+- name: github.com/go-ole/go-ole
+  version: 97b6244175ae18ea6eef668034fd6565847501c9
+  subpackages:
+  - oleutil
+- name: github.com/go-vgo/robotgo
+  version: 7e017b4cb4d39e6af9cad664c075739fe9cc76fd
+  subpackages:
+  - clipboard
+- name: github.com/lxn/win
+  version: e90c084872a829e2193ded9dbdb9a0180ddcfac0
+- name: github.com/otiai10/gosseract
+  version: ca64adaa320dc563d0966d58d3811512cb3362dc
+- name: github.com/robotn/gohook
+  version: bbbbefb5ff8541a05870596ea081ad8581b5879f
+- name: github.com/shirou/gopsutil
+  version: 27ec6a0789cefd42d1aa3ea7455b48fce7a401db
+  subpackages:
+  - cpu
+  - host
+  - internal/common
+  - mem
+  - net
+  - process
+- name: github.com/shirou/w32
+  version: bb4de0191aa41b5507caa14b0650cdbddcd9280b
+- name: github.com/StackExchange/wmi
+  version: e0a55b97c70558c92ce14085e41b35a894e93d3d
+- name: github.com/vcaesar/imgo
+  version: 13af122cf2fa6117048933e141c0b52f19116ca6
+- name: golang.org/x/image
+  version: 0694c2d4d067f97ebef574d63a763ee8ab559da7
+  subpackages:
+  - bmp
+- name: golang.org/x/sys
+  version: 1c9583448a9c3aa0f9a6a5241bf73c0bd8aafded
+  subpackages:
+  - unix
+  - windows
+testImports: []
