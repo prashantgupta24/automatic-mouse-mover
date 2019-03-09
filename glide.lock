@@ -1,5 +1,5 @@
-hash: 2f203324a3ca8f6d3a3e571dc0393f79835b0ea6194850ddc6b03e9355dfddcb
-updated: 2019-03-07T18:33:39.501851-08:00
+hash: 0f1b9b1f87f0aebc6ce5ccacb82d7a7696483a933eb792afe0fcf491d5ea4636
+updated: 2019-03-08T17:49:42.106386-08:00
 imports:
 - name: github.com/BurntSushi/xgb
   version: 27f122750802c950b2c869a5b63dafcf590ced95
@@ -13,6 +13,8 @@ imports:
   - ewmh
   - xevent
   - xprop
+- name: github.com/getlantern/systray
+  version: 26d5b920200dbc1869c4bfde4571497082f83caa
 - name: github.com/go-ole/go-ole
   version: 97b6244175ae18ea6eef668034fd6565847501c9
   subpackages:
