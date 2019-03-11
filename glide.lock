@@ -1,5 +1,5 @@
 hash: 0f1b9b1f87f0aebc6ce5ccacb82d7a7696483a933eb792afe0fcf491d5ea4636
-updated: 2019-03-08T17:49:42.106386-08:00
+updated: 2019-03-10T21:15:04.618466-07:00
 imports:
 - name: github.com/BurntSushi/xgb
   version: 27f122750802c950b2c869a5b63dafcf590ced95
@@ -13,12 +13,28 @@ imports:
   - ewmh
   - xevent
   - xprop
+- name: github.com/getlantern/context
+  version: c447772a6520c1a3ae6294a7df725ee08230f14e
+- name: github.com/getlantern/errors
+  version: e24b7f4ff7c70be59bbefca6b7695d68cda8b399
+- name: github.com/getlantern/golog
+  version: cca714f7feb5df8e455f409b549d384441ac4578
+- name: github.com/getlantern/hex
+  version: 083fba3033ad473db3dd31c9bb368473d37581a7
+- name: github.com/getlantern/hidden
+  version: d52a649ab33af200943bb599898dbdcfdbc94cb7
+- name: github.com/getlantern/ops
+  version: 37353306c90844c8e0591956f56611f46299d202
 - name: github.com/getlantern/systray
   version: 26d5b920200dbc1869c4bfde4571497082f83caa
+  subpackages:
+  - example/icon
 - name: github.com/go-ole/go-ole
   version: 97b6244175ae18ea6eef668034fd6565847501c9
   subpackages:
   - oleutil
+- name: github.com/go-stack/stack
+  version: 2fee6af1a9795aafbe0253a0cfbdf668e1fb8a9a
 - name: github.com/go-vgo/robotgo
   version: 7e017b4cb4d39e6af9cad664c075739fe9cc76fd
   subpackages:
@@ -27,6 +43,8 @@ imports:
   version: e90c084872a829e2193ded9dbdb9a0180ddcfac0
 - name: github.com/otiai10/gosseract
   version: ca64adaa320dc563d0966d58d3811512cb3362dc
+- name: github.com/oxtoacart/bpool
+  version: 8c4636f812cc8920c26e2002b988c878b1fd6f5e
 - name: github.com/robotn/gohook
   version: bbbbefb5ff8541a05870596ea081ad8581b5879f
 - name: github.com/shirou/gopsutil
