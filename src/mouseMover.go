@@ -20,7 +20,7 @@ type mousePos struct {
 
 func moveMouse(comm, quit chan struct{}) {
 	quitMouseClickHandler := make(chan struct{})
-	go isMouseClicked(comm, quitMouseClickHandler)
+	go isMouseClicked1(comm, quitMouseClickHandler)
 	ticker := time.NewTicker(time.Second * timeToCheck)
 	isIdle := true
 	movePixel := 10
@@ -28,7 +28,7 @@ func moveMouse(comm, quit chan struct{}) {
 	for {
 		select {
 		case <-ticker.C:
-			fmt.Println("ticked : ", isIdle)
+			//fmt.Println("ticked : ", isIdle)
 			currentMousePos := getMousePos()
 			if isIdle && isPointerIdle(currentMousePos, lastMousePos) {
 				fmt.Println("moving mouse")
@@ -48,8 +48,8 @@ func moveMouse(comm, quit chan struct{}) {
 			//fmt.Println("val received: ", isIdle)
 		case <-quit:
 			fmt.Println("stopped main app")
-			robotgo.StopEvent()
 			quitMouseClickHandler <- struct{}{}
+			robotgo.StopEvent()
 			return
 		}
 	}
@@ -74,32 +74,133 @@ func getMousePos() *mousePos {
 	}
 }
 
-func isMouseClicked(comm, quit chan struct{}) {
+// func isMouseClicked1(comm, quit chan struct{}) {
+// 	var wg sync.WaitGroup
+
+// 	go func() {}(&wg)
+
+// 	go func() {}(&wg)
+// }
+
+// func shoudStop(quit chan struct{}) bool {
+// 	fmt.Println("calling should stop")
+// 	select {
+// 	case <-quit:
+// 		fmt.Println("should stop now")
+// 		return true
+// 	default:
+// 		return false
+// 	}
+// }
+
+func isMouseClicked1(comm, quit chan struct{}) {
+	ticker := time.NewTicker(time.Second * 4)
+	ch := make(chan struct{})
 	go func() {
-		isRunning := true
+		isRunning := false
 		for {
 			select {
-			case <-quit:
-				fmt.Println("asked to quit")
-				isRunning = false
-				close(comm)
-			default:
+			case <-ticker.C:
+				fmt.Println("ticked mouse click at : ", time.Now())
 
+				if !isRunning {
+					isRunning = true
+					go func(ch chan struct{}) {
+						fmt.Printf("adding reg\n\n\n")
+						mleft := robotgo.AddEvent("mleft")
+						if mleft == 0 {
+							fmt.Println("mleft clicked")
+							comm <- struct{}{}
+							ch <- struct{}{}
+							return
+						}
+					}(ch)
+				}
+
+				select {
+				case _, ok := <-ch:
+					if ok {
+						fmt.Println("channel free")
+						isRunning = false
+					} else {
+						fmt.Println("Channel closed!")
+					}
+				default:
+					fmt.Println("function is busy")
+					isRunning = true
+				}
+
+				// wg.Wait()
+				// wg.Add(1)
+				// go func(wg *sync.WaitGroup) {
+				// 	fmt.Printf("adding reg\n\n\n")
+				// 	defer wg.Done()
+				// 	mleft := robotgo.AddEvent("mleft")
+				// 	if mleft == 0 {
+				// 		fmt.Println("mleft clicked")
+				// 		comm <- struct{}{}
+				// 		return
+				// 	}
+				// }(&wg)
+			case <-quit:
+				fmt.Println("should stop now")
+				close(comm)
+				return
+			}
+		}
+	}()
+}
+
+func shoudStop(quit chan struct{}) bool {
+	fmt.Println("calling should stop")
+	select {
+	case <-quit:
+		fmt.Println("should stop now")
+		return true
+	default:
+		return false
+	}
+}
+
+func isMouseClicked(comm, quit chan struct{}) {
+	//var wg sync.WaitGroup
+	go func() {
+		for {
+			if !shoudStop(quit) {
 				fmt.Println("adding reg")
 				mleft := robotgo.AddEvent("mleft")
 				if mleft == 0 {
-					if isRunning {
-						fmt.Println("mleft clicked")
-						comm <- struct{}{}
-					} else {
-						return
-					}
-
-					time.Sleep(1000 * time.Millisecond)
+					fmt.Println("mleft clicked")
+					comm <- struct{}{}
 				}
-				//}
+			} else {
+				fmt.Println("closing mouse clicked function")
+				close(comm)
+				return
 			}
 		}
+		// select {
+		// case <-quit:
+		// 	fmt.Println("asked to quit")
+		// 	isRunning = false
+		// 	close(comm)
+		// default:
+
+		// 	fmt.Println("adding reg")
+		// 	mleft := robotgo.AddEvent("mleft")
+		// 	if mleft == 0 {
+		// 		if isRunning {
+		// 			fmt.Println("mleft clicked")
+		// 			comm <- struct{}{}
+		// 		} else {
+		// 			return
+		// 		}
+
+		// 		//time.Sleep(1000 * time.Millisecond)
+		// 	}
+		// 	//}
+		// }
+
 	}()
 
 	//waiting for next robot go release in which
