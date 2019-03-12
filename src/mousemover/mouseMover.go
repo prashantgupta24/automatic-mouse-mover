@@ -10,7 +10,7 @@ import (
 
 func Start() (quit chan struct{}) {
 	quit = make(chan struct{})
-	activityCh, quitActivityDetector := activity.StartDetector()
+	activityCh, quitActivityDetector := activity.StartTracker(5)
 
 	go func() {
 		movePixel := 10
