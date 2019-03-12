@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/go-vgo/robotgo"
-	"github.com/mousemover/src/activity"
-	"github.com/mousemover/src/mouse"
+	"github.com/prashantgupta24/activity-tracker/src/activity"
+	"github.com/prashantgupta24/activity-tracker/src/mouse"
 )
 
 func Start() (quit chan struct{}) {

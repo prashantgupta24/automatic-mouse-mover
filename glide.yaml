@@ -1,6 +1,13 @@
-package: .
+package: github.com/mousemover
 import:
-- package: github.com/go-vgo/robotgo
-  version: ~0.70.0
-- package: github.com/getlantern/systray
 - package: github.com/deckarep/gosx-notifier
+- package: github.com/getlantern/systray
+  subpackages:
+  - example/icon
+- package: github.com/go-vgo/robotgo
+  version: ^0.80.0
+- package: github.com/prashantgupta24/activity-tracker
+  version: ^0.0.2
+  subpackages:
+  - src/activity
+  - src/mouse
