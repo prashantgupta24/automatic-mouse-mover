@@ -3,3 +3,4 @@ import:
 - package: github.com/go-vgo/robotgo
   version: ~0.70.0
 - package: github.com/getlantern/systray
+- package: github.com/deckarep/gosx-notifier

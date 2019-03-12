@@ -1,5 +1,5 @@
-hash: 0f1b9b1f87f0aebc6ce5ccacb82d7a7696483a933eb792afe0fcf491d5ea4636
-updated: 2019-03-10T21:15:04.618466-07:00
+hash: 40ab9cabd2c289c53dda04ec16cd0071ed9a1a12ad51ee0d39155fb589c88f81
+updated: 2019-03-11T17:26:54.781509-07:00
 imports:
 - name: github.com/BurntSushi/xgb
   version: 27f122750802c950b2c869a5b63dafcf590ced95
@@ -13,6 +13,8 @@ imports:
   - ewmh
   - xevent
   - xprop
+- name: github.com/deckarep/gosx-notifier
+  version: e127226297fb751aa3b582db5e92361fcbfc5a6c
 - name: github.com/getlantern/context
   version: c447772a6520c1a3ae6294a7df725ee08230f14e
 - name: github.com/getlantern/errors
@@ -40,7 +42,7 @@ imports:
   subpackages:
   - clipboard
 - name: github.com/lxn/win
-  version: e90c084872a829e2193ded9dbdb9a0180ddcfac0
+  version: 0040366d745006bbf7528ac96de2de375846aa79
 - name: github.com/otiai10/gosseract
   version: ca64adaa320dc563d0966d58d3811512cb3362dc
 - name: github.com/oxtoacart/bpool

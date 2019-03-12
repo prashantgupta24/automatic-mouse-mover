@@ -31,7 +31,7 @@ func moveMouse(comm, quit chan struct{}) {
 			//fmt.Println("ticked : ", isIdle)
 			currentMousePos := getMousePos()
 			if isIdle && isPointerIdle(currentMousePos, lastMousePos) {
-				fmt.Println("moving mouse")
+				fmt.Printf("no activity detected in the last %v seconds. moving mouse ...\n", timeToCheck)
 				nextMouseMov := &mousePos{
 					mouseX: currentMousePos.mouseX + movePixel,
 					mouseY: currentMousePos.mouseY + movePixel,
@@ -94,7 +94,7 @@ func getMousePos() *mousePos {
 // }
 
 func isMouseClicked1(comm, quit chan struct{}) {
-	ticker := time.NewTicker(time.Second * 4)
+	ticker := time.NewTicker(time.Second * timeToCheck)
 	ch := make(chan struct{})
 	go func() {
 		isRunning := false
@@ -244,6 +244,7 @@ func onReady() {
 			case <-ammStart.ClickedCh:
 				fmt.Println("starting the app")
 				quit = startApp()
+				//notify.SendMessage("starting the app")
 
 			case <-ammPause.ClickedCh:
 				fmt.Println("pausing the app")
