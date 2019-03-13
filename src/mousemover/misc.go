@@ -1,4 +1,4 @@
-package main
+package mousemover
 
 import (
 	"fmt"

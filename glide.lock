@@ -1,5 +1,5 @@
-hash: 54b37aa4222a628ce8877d7cdcceb94100781d37b3aa465b8f85557a2b158b58
-updated: 2019-03-12T16:32:03.54811-07:00
+hash: 0e9d554853b2c3ed23ba323715540d961c06465a1a125959a698d6162e17f91d
+updated: 2019-03-12T17:05:18.956307-07:00
 imports:
 - name: github.com/BurntSushi/xgb
   version: 27f122750802c950b2c869a5b63dafcf590ced95
@@ -48,7 +48,7 @@ imports:
 - name: github.com/oxtoacart/bpool
   version: 8c4636f812cc8920c26e2002b988c878b1fd6f5e
 - name: github.com/prashantgupta24/activity-tracker
-  version: c393a5bcf01452769b5212168535a443e714b924
+  version: d03f874cdc70250860b402c420e966dd019c6e85
   subpackages:
   - src/activity
   - src/mouse

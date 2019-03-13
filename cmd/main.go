@@ -5,7 +5,7 @@ import (
 
 	"github.com/getlantern/systray"
 	"github.com/getlantern/systray/example/icon"
-	"github.com/mousemover/src/mousemover"
+	"github.com/prashantgupta24/automatic-mouse-mover/src/mousemover"
 )
 
 func main() {

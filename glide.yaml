@@ -1,4 +1,4 @@
-package: github.com/mousemover
+package: github.com/prashantgupta24/automatic-mouse-mover
 import:
 - package: github.com/deckarep/gosx-notifier
 - package: github.com/getlantern/systray
@@ -7,7 +7,7 @@ import:
 - package: github.com/go-vgo/robotgo
   version: ^0.80.0
 - package: github.com/prashantgupta24/activity-tracker
-  version: ^0.0.2
+  version: ^0.0.1
   subpackages:
   - src/activity
   - src/mouse
