@@ -1,5 +1,5 @@
-hash: 2f203324a3ca8f6d3a3e571dc0393f79835b0ea6194850ddc6b03e9355dfddcb
-updated: 2019-03-07T18:33:39.501851-08:00
+hash: 0e9d554853b2c3ed23ba323715540d961c06465a1a125959a698d6162e17f91d
+updated: 2019-03-13T16:48:18.629713-07:00
 imports:
 - name: github.com/BurntSushi/xgb
   version: 27f122750802c950b2c869a5b63dafcf590ced95
@@ -13,22 +13,49 @@ imports:
   - ewmh
   - xevent
   - xprop
+- name: github.com/deckarep/gosx-notifier
+  version: e127226297fb751aa3b582db5e92361fcbfc5a6c
+- name: github.com/getlantern/context
+  version: c447772a6520c1a3ae6294a7df725ee08230f14e
+- name: github.com/getlantern/errors
+  version: e24b7f4ff7c70be59bbefca6b7695d68cda8b399
+- name: github.com/getlantern/golog
+  version: cca714f7feb5df8e455f409b549d384441ac4578
+- name: github.com/getlantern/hex
+  version: 083fba3033ad473db3dd31c9bb368473d37581a7
+- name: github.com/getlantern/hidden
+  version: d52a649ab33af200943bb599898dbdcfdbc94cb7
+- name: github.com/getlantern/ops
+  version: 37353306c90844c8e0591956f56611f46299d202
+- name: github.com/getlantern/systray
+  version: 26d5b920200dbc1869c4bfde4571497082f83caa
+  subpackages:
+  - example/icon
 - name: github.com/go-ole/go-ole
   version: 97b6244175ae18ea6eef668034fd6565847501c9
   subpackages:
   - oleutil
+- name: github.com/go-stack/stack
+  version: 2fee6af1a9795aafbe0253a0cfbdf668e1fb8a9a
 - name: github.com/go-vgo/robotgo
-  version: 7e017b4cb4d39e6af9cad664c075739fe9cc76fd
+  version: 193b4935d4b146c729d763c2c59a0d3e7f3cee8a
   subpackages:
   - clipboard
 - name: github.com/lxn/win
-  version: e90c084872a829e2193ded9dbdb9a0180ddcfac0
+  version: 0040366d745006bbf7528ac96de2de375846aa79
 - name: github.com/otiai10/gosseract
   version: ca64adaa320dc563d0966d58d3811512cb3362dc
+- name: github.com/oxtoacart/bpool
+  version: 8c4636f812cc8920c26e2002b988c878b1fd6f5e
+- name: github.com/prashantgupta24/activity-tracker
+  version: d567f73735304c333bba0a151cf4aca8602c1ae2
+  subpackages:
+  - src/activity
+  - src/mouse
 - name: github.com/robotn/gohook
   version: bbbbefb5ff8541a05870596ea081ad8581b5879f
 - name: github.com/shirou/gopsutil
-  version: 27ec6a0789cefd42d1aa3ea7455b48fce7a401db
+  version: ebc97eefea9b062f9f1624c042c98f196fc90248
   subpackages:
   - cpu
   - host
@@ -47,7 +74,7 @@ imports:
   subpackages:
   - bmp
 - name: golang.org/x/sys
-  version: 1c9583448a9c3aa0f9a6a5241bf73c0bd8aafded
+  version: fead79001313d15903fb4605b4a1b781532cd93e
   subpackages:
   - unix
   - windows
