@@ -1,5 +1,5 @@
 hash: 0e9d554853b2c3ed23ba323715540d961c06465a1a125959a698d6162e17f91d
-updated: 2019-03-12T17:05:18.956307-07:00
+updated: 2019-03-13T16:48:18.629713-07:00
 imports:
 - name: github.com/BurntSushi/xgb
   version: 27f122750802c950b2c869a5b63dafcf590ced95
@@ -48,14 +48,14 @@ imports:
 - name: github.com/oxtoacart/bpool
   version: 8c4636f812cc8920c26e2002b988c878b1fd6f5e
 - name: github.com/prashantgupta24/activity-tracker
-  version: d03f874cdc70250860b402c420e966dd019c6e85
+  version: d567f73735304c333bba0a151cf4aca8602c1ae2
   subpackages:
   - src/activity
   - src/mouse
 - name: github.com/robotn/gohook
   version: bbbbefb5ff8541a05870596ea081ad8581b5879f
 - name: github.com/shirou/gopsutil
-  version: 27ec6a0789cefd42d1aa3ea7455b48fce7a401db
+  version: ebc97eefea9b062f9f1624c042c98f196fc90248
   subpackages:
   - cpu
   - host

@@ -2,6 +2,7 @@ package mousemover
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/go-vgo/robotgo"
 	"github.com/prashantgupta24/activity-tracker/src/activity"
@@ -10,16 +11,21 @@ import (
 
 func Start() (quit chan struct{}) {
 	quit = make(chan struct{})
-	activityCh, quitActivityDetector := activity.StartTracker(5)
+
+	activityTracker := &activity.ActivityTracker{
+		TimeToCheck: 5,
+	}
+
+	heartbeatCh, quitActivityTracker := activityTracker.Start()
 
 	go func() {
 		movePixel := 10
 		for {
 			select {
-			case isActivity := <-activityCh:
-				if !isActivity {
+			case heartbeat := <-heartbeatCh:
+				if !heartbeat.IsActivity {
 					currentMousePos := mouse.GetPosition()
-					fmt.Println("moving mouse")
+					fmt.Println("moving mouse at : ", time.Now())
 					nextMouseMov := &mouse.Position{
 						MouseX: currentMousePos.MouseX + movePixel,
 						MouseY: currentMousePos.MouseY + movePixel,
@@ -28,8 +34,8 @@ func Start() (quit chan struct{}) {
 					movePixel *= -1
 				}
 			case <-quit:
-				fmt.Println("stopped main app")
-				quitActivityDetector <- struct{}{}
+				fmt.Println("stopping mouse mover")
+				quitActivityTracker <- struct{}{}
 				return
 			}
 		}
