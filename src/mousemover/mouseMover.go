@@ -13,7 +13,7 @@ func Start() (quit chan struct{}) {
 	quit = make(chan struct{})
 
 	activityTracker := &activity.ActivityTracker{
-		TimeToCheck: 5,
+		TimeToCheck: 15,
 	}
 
 	heartbeatCh, quitActivityTracker := activityTracker.Start()
@@ -30,7 +30,7 @@ func Start() (quit chan struct{}) {
 						MouseX: currentMousePos.MouseX + movePixel,
 						MouseY: currentMousePos.MouseY + movePixel,
 					}
-					robotgo.MoveMouseSmooth(nextMouseMov.MouseX, nextMouseMov.MouseY)
+					robotgo.MoveMouse(nextMouseMov.MouseX, nextMouseMov.MouseY)
 					movePixel *= -1
 				}
 			case <-quit:
