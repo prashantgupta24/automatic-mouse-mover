@@ -30,7 +30,7 @@ func Start() (quit chan struct{}) {
 						MouseX: currentMousePos.MouseX + movePixel,
 						MouseY: currentMousePos.MouseY + movePixel,
 					}
-					robotgo.Move(nextMouseMov.MouseX, nextMouseMov.MouseY)
+					robotgo.MoveMouseSmooth(nextMouseMov.MouseX, nextMouseMov.MouseY)
 					movePixel *= -1
 				}
 			case <-quit:
