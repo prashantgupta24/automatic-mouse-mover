@@ -5,7 +5,7 @@ import (
 
 	"github.com/getlantern/systray"
 	"github.com/getlantern/systray/example/icon"
-	"github.com/prashantgupta24/automatic-mouse-mover/src/mousemover"
+	"github.com/prashantgupta24/automatic-mouse-mover/pkg/mousemover"
 )
 
 func main() {
@@ -17,29 +17,26 @@ func onReady() {
 		systray.SetIcon(icon.Data)
 		systray.SetTitle("AMM")
 		ammStart := systray.AddMenuItem("Start", "start the app")
-		ammPause := systray.AddMenuItem("Pause", "pause the app")
+		ammStop := systray.AddMenuItem("Stop", "stop the app")
 		systray.AddSeparator()
 		mQuit := systray.AddMenuItem("Quit", "Quit the whole app")
 		// Sets the icon of a menu item. Only available on Mac.
 		//mQuit.SetIcon(icon.Data)
-		var quit chan struct{}
+		mouseMover := mousemover.GetInstance()
 		for {
 			select {
 			case <-ammStart.ClickedCh:
 				fmt.Println("starting the app")
-				quit = mousemover.Start()
+				mouseMover.Start()
 				//notify.SendMessage("starting the app")
 
-			case <-ammPause.ClickedCh:
+			case <-ammStop.ClickedCh:
 				fmt.Println("pausing the app")
-				if quit != nil {
-					quit <- struct{}{}
-				} else {
-					fmt.Println("app is not started")
-				}
+				mouseMover.Quit()
 
 			case <-mQuit.ClickedCh:
 				fmt.Println("Requesting quit")
+				mouseMover.Quit()
 				systray.Quit()
 				fmt.Println("Finished quitting")
 				return
