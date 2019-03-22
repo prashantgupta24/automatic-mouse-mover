@@ -1,5 +1,5 @@
 hash: 0e9d554853b2c3ed23ba323715540d961c06465a1a125959a698d6162e17f91d
-updated: 2019-03-13T16:48:18.629713-07:00
+updated: 2019-03-22T15:34:56.64781-07:00
 imports:
 - name: github.com/BurntSushi/xgb
   version: 27f122750802c950b2c869a5b63dafcf590ced95
@@ -41,21 +41,28 @@ imports:
   version: 193b4935d4b146c729d763c2c59a0d3e7f3cee8a
   subpackages:
   - clipboard
+- name: github.com/konsorten/go-windows-terminal-sequences
+  version: f55edac94c9bbba5d6182a4be46d86a2c9b5b50e
 - name: github.com/lxn/win
   version: 0040366d745006bbf7528ac96de2de375846aa79
 - name: github.com/otiai10/gosseract
-  version: ca64adaa320dc563d0966d58d3811512cb3362dc
+  version: d442e510d0b37ec1f332a61a04e323ecee91d0cb
 - name: github.com/oxtoacart/bpool
   version: 8c4636f812cc8920c26e2002b988c878b1fd6f5e
 - name: github.com/prashantgupta24/activity-tracker
-  version: d567f73735304c333bba0a151cf4aca8602c1ae2
+  version: d60ddb4a3211e471b1a3fcd9b5dec960a453c79c
   subpackages:
+  - internal/pkg/logging
+  - internal/pkg/mouse
+  - internal/pkg/service
+  - pkg/activity
+  - pkg/tracker
   - src/activity
   - src/mouse
 - name: github.com/robotn/gohook
-  version: bbbbefb5ff8541a05870596ea081ad8581b5879f
+  version: a7a38946710e764b00839160e13a92b09e40e96a
 - name: github.com/shirou/gopsutil
-  version: ebc97eefea9b062f9f1624c042c98f196fc90248
+  version: 381f7cc0bf4ccb60157fd5c6eaabfdfc681e6c2f
   subpackages:
   - cpu
   - host
@@ -65,16 +72,22 @@ imports:
   - process
 - name: github.com/shirou/w32
   version: bb4de0191aa41b5507caa14b0650cdbddcd9280b
+- name: github.com/sirupsen/logrus
+  version: dae0fa8d5b0c810a8ab733fbd5510c7cae84eca4
 - name: github.com/StackExchange/wmi
   version: e0a55b97c70558c92ce14085e41b35a894e93d3d
 - name: github.com/vcaesar/imgo
   version: 13af122cf2fa6117048933e141c0b52f19116ca6
+- name: golang.org/x/crypto
+  version: b7391e95e576cacdcdd422573063bc057239113d
+  subpackages:
+  - ssh/terminal
 - name: golang.org/x/image
-  version: 0694c2d4d067f97ebef574d63a763ee8ab559da7
+  version: 3fc05d484e9f77dd51816890e05f2602e4ca4d65
   subpackages:
   - bmp
 - name: golang.org/x/sys
-  version: fead79001313d15903fb4605b4a1b781532cd93e
+  version: f49334f85ddcf0f08d7fb6dd7363e9e6d6b777eb
   subpackages:
   - unix
   - windows
