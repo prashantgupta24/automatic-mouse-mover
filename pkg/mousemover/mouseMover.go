@@ -26,6 +26,7 @@ func (m *mouseMover) Start() {
 	frequency := 5 //value always in seconds
 	activityTracker := &tracker.Instance{
 		Frequency: frequency,
+		//LogLevel:  "debug", //if we want verbose logging
 	}
 
 	heartbeatCh := activityTracker.Start()
@@ -42,7 +43,7 @@ func (m *mouseMover) Start() {
 					select {
 					case wasMouseMoveSuccess := <-commCh:
 						if wasMouseMoveSuccess {
-							fmt.Println("moving mouse at : \n", time.Now())
+							fmt.Printf("\nmoving mouse at : %v\n\n", time.Now())
 							movePixel *= -1
 						}
 					case <-time.After(timeout * time.Millisecond):
@@ -71,7 +72,7 @@ func moveMouse(movePixel int, commCh chan bool) {
 
 func (m *mouseMover) Quit() {
 	//making it idempotent
-	if !m.isRunning {
+	if m != nil && m.isRunning {
 		m.quit <- struct{}{}
 	}
 }

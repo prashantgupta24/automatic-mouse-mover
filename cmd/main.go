@@ -31,7 +31,7 @@ func onReady() {
 				//notify.SendMessage("starting the app")
 
 			case <-ammStop.ClickedCh:
-				fmt.Println("pausing the app")
+				fmt.Println("stopping the app")
 				mouseMover.Quit()
 
 			case <-mQuit.ClickedCh:
