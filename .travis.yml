@@ -16,7 +16,7 @@ addons:
          - libxkbcommon-dev
          - xsel
          - xclip
-         - appindicator3-0.1
+         - gtk+-3.0
 
 # Don't email me the results of the test runs.
 notifications:
