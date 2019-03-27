@@ -1,0 +1,18 @@
+language: go
+
+go:
+  - 1.11.x
+
+env:
+  - GO111MODULE=on 
+
+# Don't email me the results of the test runs.
+notifications:
+  email: false
+
+before_install:
+  - export PATH=$PATH:$HOME/gopath/bin
+  - go get -t -v ./...
+
+script:
+  - go test -v -failfast -race ./...
