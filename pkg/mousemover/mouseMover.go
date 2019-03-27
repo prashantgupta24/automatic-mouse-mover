@@ -9,9 +9,10 @@ import (
 	"github.com/prashantgupta24/activity-tracker/pkg/tracker"
 )
 
-var instance *mouseMover
+var instance *MouseMover
 
-type mouseMover struct {
+//MouseMover is the main struct for the app
+type MouseMover struct {
 	quit      chan struct{}
 	isRunning bool
 }
@@ -20,7 +21,8 @@ const (
 	timeout = 100 //ms
 )
 
-func (m *mouseMover) Start() {
+//Start the main app
+func (m *MouseMover) Start() {
 	m.quit = make(chan struct{})
 
 	frequency := 5 //value always in seconds
@@ -31,7 +33,7 @@ func (m *mouseMover) Start() {
 
 	heartbeatCh := activityTracker.Start()
 
-	go func(m *mouseMover) {
+	go func(m *MouseMover) {
 		m.isRunning = true
 		movePixel := 10
 		for {
@@ -70,7 +72,8 @@ func moveMouse(movePixel int, commCh chan bool) {
 	commCh <- true
 }
 
-func (m *mouseMover) Quit() {
+//Quit the app
+func (m *MouseMover) Quit() {
 	//making it idempotent
 	if m != nil && m.isRunning {
 		m.quit <- struct{}{}
@@ -78,9 +81,9 @@ func (m *mouseMover) Quit() {
 }
 
 //GetInstance gets the singleton instance for mouse mover app
-func GetInstance() *mouseMover {
+func GetInstance() *MouseMover {
 	if instance == nil {
-		instance = &mouseMover{}
+		instance = &MouseMover{}
 	}
 	return instance
 }
