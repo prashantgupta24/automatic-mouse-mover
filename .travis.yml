@@ -15,7 +15,8 @@ addons:
         #  - libusb-dev
          - libxkbcommon-dev
          - xsel
-         - xclip  
+         - xclip
+         - appindicator3-0.1
 
 # Don't email me the results of the test runs.
 notifications:
