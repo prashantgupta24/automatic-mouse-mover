@@ -1,7 +1,7 @@
 package notify
 
 import (
-	"fmt"
+	log "github.com/sirupsen/logrus"
 
 	gosxnotifier "github.com/deckarep/gosx-notifier"
 )
@@ -11,6 +11,6 @@ func SendMessage(msg string) {
 	note := gosxnotifier.NewNotification(msg)
 	err := note.Push()
 	if err != nil {
-		fmt.Println("could not send notification")
+		log.Error("could not send")
 	}
 }

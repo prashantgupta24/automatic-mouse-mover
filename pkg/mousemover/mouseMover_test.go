@@ -1,11 +1,9 @@
 package mousemover
 
 import (
-	"math"
 	"testing"
 	"time"
 
-	"github.com/go-vgo/robotgo"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -43,13 +41,4 @@ func (suite *TestMover) TestAppStartAndStop() {
 	mouseMover.Quit()
 	time.Sleep(time.Millisecond * 500) //wait for app to stop
 	assert.False(t, mouseMover.isRunning(), "app should have stopped")
-}
-func (suite *TestMover) TestMouseMove() {
-	t := suite.T()
-	movePixel := 10
-	currentX, _ := robotgo.GetMousePos()
-	commCh := make(chan bool, 1)
-	moveMouse(movePixel, commCh)
-	movedX, _ := robotgo.GetMousePos()
-	assert.Equal(t, float64(movePixel), math.Abs(float64(movedX-currentX)))
 }
