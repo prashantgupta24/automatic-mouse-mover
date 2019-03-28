@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-vgo/robotgo"
 	"github.com/prashantgupta24/activity-tracker/pkg/tracker"
+	"github.com/prashantgupta24/automatic-mouse-mover/pkg/notify"
 )
 
 var instance *MouseMover
@@ -45,13 +46,17 @@ func (m *MouseMover) Start() {
 			select {
 			case heartbeat := <-heartbeatCh:
 				if !heartbeat.WasAnyActivity {
-					commCh := make(chan bool)
-					go moveMouse(movePixel, commCh)
+					mouseMoveSuccessCh := make(chan bool)
+					go moveAndCheck(movePixel, mouseMoveSuccessCh)
 					select {
-					case wasMouseMoveSuccess := <-commCh:
+					case wasMouseMoveSuccess := <-mouseMoveSuccessCh:
 						if wasMouseMoveSuccess {
-							log.Infof("moving mouse at : %v\n\n", time.Now())
+							log.Infof("moved mouse at : %v\n\n", time.Now())
 							movePixel *= -1
+						} else {
+							msg := "Mouse pointer cannot be moved. See README for details."
+							log.Errorf(msg)
+							notify.SendMessage(msg)
 						}
 					case <-time.After(timeout * time.Millisecond):
 						//timeout, do nothing
@@ -80,12 +85,20 @@ func (m *MouseMover) updateRunningStatus(isRunning bool) {
 	m.runningStatus = isRunning
 }
 
-func moveMouse(movePixel int, commCh chan bool) {
+func moveAndCheck(movePixel int, mouseMoveSuccessCh chan bool) {
 	currentX, currentY := robotgo.GetMousePos()
 	moveToX := currentX + movePixel
 	moveToY := currentY + movePixel
 	robotgo.MoveMouse(moveToX, moveToY)
-	commCh <- true
+
+	//check if mouse moved. Sometimes mac users need to give
+	//extra permission for controlling the mouse
+	movedX, movedY := robotgo.GetMousePos()
+	if movedX == currentX && movedY == currentY {
+		mouseMoveSuccessCh <- false
+	} else {
+		mouseMoveSuccessCh <- true
+	}
 }
 
 //Quit the app
