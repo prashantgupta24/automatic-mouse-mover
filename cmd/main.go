@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/getlantern/systray"
-	"github.com/getlantern/systray/example/icon"
+	"github.com/prashantgupta24/automatic-mouse-mover/assets/icon"
 	"github.com/prashantgupta24/automatic-mouse-mover/pkg/mousemover"
 )
 
@@ -15,7 +15,6 @@ func main() {
 func onReady() {
 	go func() {
 		systray.SetIcon(icon.Data)
-		systray.SetTitle("AMM")
 		ammStart := systray.AddMenuItem("Start", "start the app")
 		ammStop := systray.AddMenuItem("Stop", "stop the app")
 		systray.AddSeparator()
