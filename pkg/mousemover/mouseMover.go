@@ -30,7 +30,7 @@ func (m *MouseMover) Start() {
 	}
 	m.quit = make(chan struct{})
 
-	frequency := 5 //value always in seconds
+	frequency := 60 //value always in seconds
 	activityTracker := &tracker.Instance{
 		Frequency: frequency,
 		//LogLevel:  "debug", //if we want verbose logging
@@ -44,7 +44,7 @@ func (m *MouseMover) Start() {
 		for {
 			select {
 			case heartbeat := <-heartbeatCh:
-				if !heartbeat.IsActivity {
+				if !heartbeat.WasAnyActivity {
 					commCh := make(chan bool)
 					go moveMouse(movePixel, commCh)
 					select {
