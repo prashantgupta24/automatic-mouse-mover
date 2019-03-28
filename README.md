@@ -9,8 +9,8 @@ Ever felt the need to keep your machine awake without having to resort to the ag
 
 ## Error while moving the app
 
-In case you get an error from the app saying `mouse pointer cannot be moved.`, you need to give the app permission to control your mouse. Don't worry, it's nothing sinister, but Mac doesn't allow outside apps to gain accessibility to the mouse by default (which include Firefox, Discord etc.)
+In case you get an error from the app saying `mouse pointer cannot be moved.`, you need to give the app permission to control your mouse. Don't worry, it's nothing sinister, but Mac doesn't allow apps to gain accessibility to the computer by default (even standard apps like Automator, Firefox etc. who might want to access some features need to go through the same process)
 
 In order to resolve this error you need to:
 
-Go to Security & Privacy -> Privacy -> Accessibility and allow the `amm` app to gain access.
+> Go to Security & Privacy -> Privacy -> Accessibility and allow the `amm` app to gain access.
