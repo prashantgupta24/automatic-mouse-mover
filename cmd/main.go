@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/getlantern/systray"
 	"github.com/prashantgupta24/automatic-mouse-mover/assets/icon"
@@ -17,6 +17,7 @@ func onReady() {
 		systray.SetIcon(icon.Data)
 		ammStart := systray.AddMenuItem("Start", "start the app")
 		ammStop := systray.AddMenuItem("Stop", "stop the app")
+		ammStop.Disable()
 		systray.AddSeparator()
 		mQuit := systray.AddMenuItem("Quit", "Quit the whole app")
 		// Sets the icon of a menu item. Only available on Mac.
@@ -25,19 +26,22 @@ func onReady() {
 		for {
 			select {
 			case <-ammStart.ClickedCh:
-				fmt.Println("starting the app")
+				log.Infof("starting the app")
 				mouseMover.Start()
+				ammStart.Disable()
+				ammStop.Enable()
 				//notify.SendMessage("starting the app")
 
 			case <-ammStop.ClickedCh:
-				fmt.Println("stopping the app")
+				log.Infof("stopping the app")
+				ammStart.Enable()
+				ammStop.Disable()
 				mouseMover.Quit()
 
 			case <-mQuit.ClickedCh:
-				fmt.Println("Requesting quit")
+				log.Infof("Requesting quit")
 				mouseMover.Quit()
 				systray.Quit()
-				fmt.Println("Finished quitting")
 				return
 			}
 		}
@@ -47,6 +51,5 @@ func onReady() {
 
 func onExit() {
 	// clean up here
-	fmt.Println("exiting")
-
+	log.Infof("Finished quitting")
 }

@@ -12,7 +12,7 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/go-vgo/robotgo v0.0.0-20190321150332-9d92e0f852ca
 	github.com/oxtoacart/bpool v0.0.0-20190227141107-8c4636f812cc // indirect
-	github.com/prashantgupta24/activity-tracker v0.3.1
-	github.com/sirupsen/logrus v1.4.0 // indirect
-	github.com/stretchr/testify v1.2.2
+	github.com/prashantgupta24/activity-tracker v0.4.0
+	github.com/sirupsen/logrus v1.4.0
+	github.com/stretchr/testify v1.3.0
 )
