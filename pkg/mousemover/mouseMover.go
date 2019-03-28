@@ -1,9 +1,10 @@
 package mousemover
 
 import (
-	"fmt"
-	"log"
+	"sync"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/go-vgo/robotgo"
 	"github.com/prashantgupta24/activity-tracker/pkg/tracker"
@@ -13,8 +14,9 @@ var instance *MouseMover
 
 //MouseMover is the main struct for the app
 type MouseMover struct {
-	quit      chan struct{}
-	isRunning bool
+	quit          chan struct{}
+	mutex         sync.RWMutex
+	runningStatus bool
 }
 
 const (
@@ -23,6 +25,9 @@ const (
 
 //Start the main app
 func (m *MouseMover) Start() {
+	if m.isRunning() {
+		return
+	}
 	m.quit = make(chan struct{})
 
 	frequency := 5 //value always in seconds
@@ -34,7 +39,7 @@ func (m *MouseMover) Start() {
 	heartbeatCh := activityTracker.Start()
 
 	go func(m *MouseMover) {
-		m.isRunning = true
+		m.updateRunningStatus(true)
 		movePixel := 10
 		for {
 			select {
@@ -45,23 +50,34 @@ func (m *MouseMover) Start() {
 					select {
 					case wasMouseMoveSuccess := <-commCh:
 						if wasMouseMoveSuccess {
-							fmt.Printf("\nmoving mouse at : %v\n\n", time.Now())
+							log.Infof("moving mouse at : %v\n\n", time.Now())
 							movePixel *= -1
 						}
 					case <-time.After(timeout * time.Millisecond):
 						//timeout, do nothing
-						log.Printf("timeout happened after %vms while trying to move mouse", timeout)
+						log.Errorf("timeout happened after %vms while trying to move mouse", timeout)
 					}
 
 				}
 			case <-m.quit:
-				fmt.Println("stopping mouse mover")
-				m.isRunning = false
+				log.Infof("stopping mouse mover")
+				m.updateRunningStatus(false)
 				activityTracker.Quit()
 				return
 			}
 		}
 	}(m)
+}
+
+func (m *MouseMover) isRunning() bool {
+	m.mutex.RLock()
+	defer m.mutex.RUnlock()
+	return m.runningStatus
+}
+func (m *MouseMover) updateRunningStatus(isRunning bool) {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
+	m.runningStatus = isRunning
 }
 
 func moveMouse(movePixel int, commCh chan bool) {
@@ -75,7 +91,7 @@ func moveMouse(movePixel int, commCh chan bool) {
 //Quit the app
 func (m *MouseMover) Quit() {
 	//making it idempotent
-	if m != nil && m.isRunning {
+	if m != nil && m.isRunning() {
 		m.quit <- struct{}{}
 	}
 }
