@@ -4,6 +4,7 @@ build: clean
 	mkdir -p -v ./bin/amm.app/Contents/Resources
 	mkdir -p -v ./bin/amm.app/Contents/MacOS
 	cp ./appInfo/*.plist ./bin/amm.app/Contents/Info.plist
+	cp ./appInfo/*.icns ./bin/amm.app/Contents/Resources/icon.icns
 	go build -o ./bin/amm.app/Contents/MacOS/amm cmd/main.go
 
 open: build
