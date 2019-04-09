@@ -8,7 +8,6 @@ import (
 
 	"github.com/go-vgo/robotgo"
 	"github.com/prashantgupta24/activity-tracker/pkg/tracker"
-	"github.com/prashantgupta24/automatic-mouse-mover/pkg/notify"
 )
 
 var instance *MouseMover
@@ -56,7 +55,7 @@ func (m *MouseMover) Start() {
 						} else {
 							msg := "Mouse pointer cannot be moved. See README for details."
 							log.Errorf(msg)
-							notify.SendMessage(msg)
+							robotgo.ShowAlert("Error with Automatic Mouse Mover", msg)
 						}
 					case <-time.After(timeout * time.Millisecond):
 						//timeout, do nothing
