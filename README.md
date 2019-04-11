@@ -8,9 +8,14 @@ Ever felt the need to keep your machine awake without having to resort to the ag
 
 ## Demo
 
+You just click on `Start`, and AMM will take care of moving your mouse whenever it feels that the system has been left idle for a long time. It's as simple as this. 
+
+![](https://github.com/prashantgupta24/automatic-mouse-mover/blob/readme-patch/amm-demo.gif)
+
+
 ## How it works
 
-See [Activity tracker](https://github.com/prashantgupta24/activity-tracker) for a full description of how the idleness is tracked.
+AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track various changes to your system. ALl is open-sourced and public code so no worries if there's nefarious intention involved.
 
 ## Error while running the app
 
