@@ -6,6 +6,11 @@ Ever felt the need to keep your machine awake without having to resort to the ag
 
 > Introducing the simplest app on the market that has the sole purpose of moving your mouse pointer at regular intervals so that your machine never sleeps! And best of all, it works **ONLY** when you are not working, so be rest assured that the mouse won't start moving on its own without the machine actually being idle.
 
+## Demo
+
+## How it works
+
+See [Activity tracker](https://github.com/prashantgupta24/activity-tracker) for a full description of how the idleness is tracked.
 
 ## Error while running the app
 
