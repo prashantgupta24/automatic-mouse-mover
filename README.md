@@ -1,8 +1,9 @@
 ## Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
 ![GitHub release](https://img.shields.io/github/release/prashantgupta24/automatic-mouse-mover.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover)
 
-Ever felt the need to keep your machine awake without having to resort to the age-old methods of playing a video or installing an app that you don't trust? **Well, not anymore!**
+Ever felt the need to keep your machine awake without having to resort to the age-old methods of installing an app that you don't trust or playing a video? **Well, not anymore!**
 
 Introducing the simplest app on the market that has the sole purpose of moving your mouse pointer at regular intervals so that your machine never sleeps! And best of all, it works **ONLY** when you are not working, so be rest assured that the mouse won't start moving on its own without the machine actually being idle.
 
@@ -14,9 +15,10 @@ You just click on `Start`, and AMM will take care of moving your mouse whenever 
 
 ## How to install
 
-## How it works
+Make sure you have `go` installed. Once that is done, clone this repo and run `Make`, it should create the `amm.app` and open the folder where it was built for you. You just have to drag and drop it to the `Applications` folder on your mac. 
 
-AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track various changes to your system. All code is public and open-sourced so no worries if there's nefarious intention involved or not.
+Double click on the app, and the cute `mouse` should appear on your taskbar on top of your screen. Once you click on `Start`, you might encounter an initial setup error which I've discussed in the next section. If not, then you are all set! 
+
 ## Error while running the app
 
 In case you get an error from the app saying `mouse pointer cannot be moved.`, you need to give the app permission to control your mouse. Don't worry, it's nothing sinister, but Mac doesn't allow apps to gain accessibility to the computer by default (even standard apps like Automator, Firefox etc. who might want to access some features need to go through the same process)
@@ -24,3 +26,7 @@ In case you get an error from the app saying `mouse pointer cannot be moved.`, y
 In order to resolve this error you need to:
 
 > Go to Security & Privacy -> Privacy -> Accessibility and allow the `amm` app to gain access.
+
+## How it works
+
+AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track various changes to your system. All code is public and open-sourced so no worrying if there's nefarious intention involved or not.
