@@ -33,6 +33,6 @@ In order to resolve this error you need to:
 
 ## How it works
 
-Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track the various changes that happened in your system during that time, like cursor movement, mouse clicks, screen changes etc. Whenever `AMM` detects a change in the system, it knows that the system is busy and will not do anything. If not, it moves the mouse cursor ever so slightly, enough to make your Mac not go to sleep.
+Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track the various changes that happened in your system during that time, like cursor movement, mouse clicks, screen changes etc. Whenever `AMM` detects a change in the system, it knows that the system is busy and will not do anything. If not, it moves the mouse cursor ever so slightly, enough to keep your Mac awake for eternity.
 
 > All code is public and open-sourced so no worrying if there's nefarious intention involved in recording your activity or not.
