@@ -11,7 +11,7 @@ Introducing the simplest app on the market that has the sole purpose of moving y
 
 You just click on `Start`, and AMM will take care of moving your mouse whenever it feels that the system has been left idle for a long time. It's as simple as this. 
 
-![](https://github.com/prashantgupta24/automatic-mouse-mover/tree/master/resources/amm-demo.gif)
+![](https://github.com/prashantgupta24/automatic-mouse-mover/blob/master/resources/amm-demo.gif)
 
 ## How to install
 
@@ -23,7 +23,7 @@ Double click on the app, and the cute `mouse` should appear on your taskbar on t
 
 While starting the app, you might see a message like the one below or an error stating `Mouse pointer cannot be moved`.
 
-![](https://github.com/prashantgupta24/automatic-mouse-mover/tree/master/resources/request.jpg)
+![](https://github.com/prashantgupta24/automatic-mouse-mover/blob/master/resources/request.jpg)
 
 Don't worry, it's nothing sinister, it's just that Mac doesn't allow apps to gain accessibility to the computer by default (even standard apps like Automator, Firefox etc. who might want to access some features need to go through the same process).
 
