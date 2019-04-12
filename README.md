@@ -17,11 +17,11 @@ You just click on `Start`, and AMM will take care of moving your mouse whenever 
 
 Make sure you have `go` installed. Once that is done, clone this repo and run `Make`, it should create the `amm.app` and open the folder where it was built for you. You just have to drag and drop it to the `Applications` folder on your mac. 
 
-Double click on the app, and the cute `mouse` should appear on your taskbar on top of your screen. Once you click on `Start`, you might encounter an initial `request` which I've discussed in the next section. If not, then you are all set! 
+Double click on the app, and the cute `mouse` should appear on your taskbar on top of your screen. Once you click on `Start`, you might encounter an initial `Access request` which I've discussed in the next section. If not, then you are all set! 
 
 ## Granting access for moving the mouse cursor
 
-While starting the app, you might see a message like the one below or an error stating `Mouse pointer cannot be moved.`.
+While starting the app, you might see a message like the one below or an error stating `Mouse pointer cannot be moved`.
 
 ![](https://github.com/prashantgupta24/automatic-mouse-mover/tree/master/resources/request.jpg)
 
@@ -33,4 +33,6 @@ In order to resolve this error you need to:
 
 ## How it works
 
-AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track various changes to your system. All code is public and open-sourced so no worrying if there's nefarious intention involved or not.
+Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track the various changes that happened in your system during that time, like cursor movement, mouse clicks, screen changes etc. Whenever `AMM` detects a change in the system, it knows that the system is busy and will not do anything. If not, it moves the mouse cursor ever so slightly, enough to make your Mac not go to sleep.
+
+> All code is public and open-sourced so no worrying if there's nefarious intention involved in recording your activity or not.
