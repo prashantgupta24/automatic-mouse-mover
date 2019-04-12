@@ -30,9 +30,12 @@ func (m *MouseMover) Start() {
 	}
 	m.quit = make(chan struct{})
 
-	frequency := 60 //value always in seconds
+	heartbeatInterval := 60 //value always in seconds
+	workerInterval := 15
+
 	activityTracker := &tracker.Instance{
-		Frequency: frequency,
+		HeartbeatInterval: heartbeatInterval,
+		WorkerInterval:    workerInterval,
 		//LogLevel:  "debug", //if we want verbose logging
 	}
 
@@ -62,6 +65,14 @@ func (m *MouseMover) Start() {
 						log.Errorf("timeout happened after %vms while trying to move mouse", timeout)
 					}
 
+				} else {
+					//uncomment just for reference
+					// log.Printf("activity detected in the last %v seconds.", int(heartbeatInterval))
+					// log.Printf("Activity type:\n")
+					// for activityType, times := range heartbeat.ActivityMap {
+					// 	log.Printf("activityType : %v times: %v\n", activityType, len(times))
+					// }
+					// log.Printf("\n\n\n")
 				}
 			case <-m.quit:
 				log.Infof("stopping mouse mover")
