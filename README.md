@@ -31,6 +31,8 @@ In order to resolve this error you need to:
 
 > Go to System Preferences -> Security & Privacy -> Privacy -> Accessibility and allow the `amm` app to gain access.
 
+If you still see the error, try to `Stop` and `Start` the app (the age-old way of fixing everything).
+
 ## How it works
 
 Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track the various changes that happened in your system during that time, like cursor movement, mouse clicks, screen changes etc. Whenever `AMM` detects a change in the system, it knows that the system is busy and will not do anything. If not, it moves the mouse cursor ever so slightly, enough to keep your Mac awake for eternity.
