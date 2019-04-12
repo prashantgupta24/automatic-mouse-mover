@@ -31,7 +31,7 @@ In order to resolve this error you need to:
 
 > Go to System Preferences -> Security & Privacy -> Privacy -> Accessibility and allow the `amm` app to gain access.
 
-If you still see the error, try to `Stop` and `Start` the app (the age-old way of fixing everything).
+If you still see the error, try to quit and start the app again (the age-old way of fixing everything).
 
 ## How it works
 
