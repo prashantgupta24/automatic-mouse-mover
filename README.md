@@ -11,21 +11,25 @@ Introducing the simplest app on the market that has the sole purpose of moving y
 
 You just click on `Start`, and AMM will take care of moving your mouse whenever it feels that the system has been left idle for a long time. It's as simple as this. 
 
-![](https://github.com/prashantgupta24/automatic-mouse-mover/blob/readme-patch/amm-demo.gif)
+![](https://github.com/prashantgupta24/automatic-mouse-mover/tree/master/resources/amm-demo.gif)
 
 ## How to install
 
 Make sure you have `go` installed. Once that is done, clone this repo and run `Make`, it should create the `amm.app` and open the folder where it was built for you. You just have to drag and drop it to the `Applications` folder on your mac. 
 
-Double click on the app, and the cute `mouse` should appear on your taskbar on top of your screen. Once you click on `Start`, you might encounter an initial setup error which I've discussed in the next section. If not, then you are all set! 
+Double click on the app, and the cute `mouse` should appear on your taskbar on top of your screen. Once you click on `Start`, you might encounter an initial `request` which I've discussed in the next section. If not, then you are all set! 
 
-## Error while running the app
+## Granting access for moving the mouse cursor
 
-In case you get an error from the app saying `mouse pointer cannot be moved.`, you need to give the app permission to control your mouse. Don't worry, it's nothing sinister, but Mac doesn't allow apps to gain accessibility to the computer by default (even standard apps like Automator, Firefox etc. who might want to access some features need to go through the same process)
+While starting the app, you might see a message like the one below or an error stating `Mouse pointer cannot be moved.`.
+
+![](https://github.com/prashantgupta24/automatic-mouse-mover/tree/master/resources/request.jpg)
+
+Don't worry, it's nothing sinister, it's just that Mac doesn't allow apps to gain accessibility to the computer by default (even standard apps like Automator, Firefox etc. who might want to access some features need to go through the same process).
 
 In order to resolve this error you need to:
 
-> Go to Security & Privacy -> Privacy -> Accessibility and allow the `amm` app to gain access.
+> Go to System Preferences -> Security & Privacy -> Privacy -> Accessibility and allow the `amm` app to gain access.
 
 ## How it works
 
