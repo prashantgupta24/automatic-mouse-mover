@@ -1,9 +1,12 @@
 package mousemover
 
 import (
+	"fmt"
+	"os"
 	"sync"
 	"time"
 
+	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/go-vgo/robotgo"
@@ -17,10 +20,12 @@ type MouseMover struct {
 	quit          chan struct{}
 	mutex         sync.RWMutex
 	runningStatus bool
+	logFile       *os.File
 }
 
 const (
-	timeout = 100 //ms
+	timeout     = 100 //ms
+	logFileName = "logFile"
 )
 
 //Start the main app
@@ -31,7 +36,7 @@ func (m *MouseMover) Start() {
 	m.quit = make(chan struct{})
 
 	heartbeatInterval := 60 //value always in seconds
-	workerInterval := 15
+	workerInterval := 10
 
 	activityTracker := &tracker.Instance{
 		HeartbeatInterval: heartbeatInterval,
@@ -42,8 +47,11 @@ func (m *MouseMover) Start() {
 	heartbeatCh := activityTracker.Start()
 
 	go func(m *MouseMover) {
+		logger := getLogger(m, false) //set writeToFile=true only for debugging
 		m.updateRunningStatus(true)
 		movePixel := 10
+		var lastMoved time.Time
+		didNotMoveTimes := 0
 		for {
 			select {
 			case heartbeat := <-heartbeatCh:
@@ -53,29 +61,36 @@ func (m *MouseMover) Start() {
 					select {
 					case wasMouseMoveSuccess := <-mouseMoveSuccessCh:
 						if wasMouseMoveSuccess {
-							log.Infof("moved mouse at : %v\n\n", time.Now())
+							lastMoved = time.Now()
+							logger.Infof("moved mouse at : %v\n\n", lastMoved)
 							movePixel *= -1
+							didNotMoveTimes = 0
 						} else {
-							msg := "Mouse pointer cannot be moved. See README for details."
-							log.Errorf(msg)
-							robotgo.ShowAlert("Error with Automatic Mouse Mover", msg)
+							didNotMoveTimes++
+							msg := fmt.Sprintf("Mouse pointer cannot be moved at %v. Last moved at %v. Happened %v times. See README for details.",
+								time.Now(), lastMoved, didNotMoveTimes)
+							logger.Errorf(msg)
+							if didNotMoveTimes >= 3 {
+								go func() {
+									robotgo.ShowAlert("Error with Automatic Mouse Mover", msg)
+								}()
+							}
 						}
 					case <-time.After(timeout * time.Millisecond):
 						//timeout, do nothing
-						log.Errorf("timeout happened after %vms while trying to move mouse", timeout)
+						logger.Errorf("timeout happened after %vms while trying to move mouse", timeout)
 					}
 
-				} else {
-					//uncomment just for reference
-					// log.Printf("activity detected in the last %v seconds.", int(heartbeatInterval))
-					// log.Printf("Activity type:\n")
+				} else { //uncomment to see all activities received
+					// logger.Printf("activity detected in the last %v seconds.", int(heartbeatInterval))
+					// logger.Printf("Activity type:\n")
 					// for activityType, times := range heartbeat.ActivityMap {
-					// 	log.Printf("activityType : %v times: %v\n", activityType, len(times))
+					// 	logger.Printf("activityType : %v times: %v\n", activityType, len(times))
 					// }
-					// log.Printf("\n\n\n")
+					// logger.Printf("\n\n\n")
 				}
 			case <-m.quit:
-				log.Infof("stopping mouse mover")
+				logger.Infof("stopping mouse mover")
 				m.updateRunningStatus(false)
 				activityTracker.Quit()
 				return
@@ -117,6 +132,7 @@ func (m *MouseMover) Quit() {
 	if m != nil && m.isRunning() {
 		m.quit <- struct{}{}
 	}
+	m.logFile.Close()
 }
 
 //GetInstance gets the singleton instance for mouse mover app
@@ -125,4 +141,22 @@ func GetInstance() *MouseMover {
 		instance = &MouseMover{}
 	}
 	return instance
+}
+
+func getLogger(m *MouseMover, doWriteToFile bool) *log.Logger {
+	logger := log.New()
+	logger.Formatter = &logrus.TextFormatter{
+		FullTimestamp: true,
+	}
+
+	if doWriteToFile {
+		logFile, err := os.OpenFile(logFileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		if err != nil {
+			log.Fatalf("error opening file: %v", err)
+		}
+		logger.SetOutput(logFile)
+		m.logFile = logFile
+	}
+
+	return logger
 }
