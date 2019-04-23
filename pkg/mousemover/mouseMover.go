@@ -10,6 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/go-vgo/robotgo"
+	"github.com/prashantgupta24/activity-tracker/pkg/activity"
 	"github.com/prashantgupta24/activity-tracker/pkg/tracker"
 )
 
@@ -25,7 +26,7 @@ type MouseMover struct {
 
 const (
 	timeout     = 100 //ms
-	logFileName = "logFile"
+	logFileName = "log/logFile-amm-1"
 )
 
 //Start the main app
@@ -51,11 +52,16 @@ func (m *MouseMover) Start() {
 		m.updateRunningStatus(true)
 		movePixel := 10
 		var lastMoved time.Time
+		isSystemSleeping := false
 		didNotMoveTimes := 0
 		for {
 			select {
 			case heartbeat := <-heartbeatCh:
 				if !heartbeat.WasAnyActivity {
+					if isSystemSleeping {
+						logger.Infof("system sleeping")
+						continue
+					}
 					mouseMoveSuccessCh := make(chan bool)
 					go moveAndCheck(movePixel, mouseMoveSuccessCh)
 					select {
@@ -80,14 +86,18 @@ func (m *MouseMover) Start() {
 						//timeout, do nothing
 						logger.Errorf("timeout happened after %vms while trying to move mouse", timeout)
 					}
-
-				} else { //uncomment to see all activities received
-					// logger.Printf("activity detected in the last %v seconds.", int(heartbeatInterval))
-					// logger.Printf("Activity type:\n")
-					// for activityType, times := range heartbeat.ActivityMap {
-					// 	logger.Printf("activityType : %v times: %v\n", activityType, len(times))
-					// }
-					// logger.Printf("\n\n\n")
+				} else {
+					logger.Infof("activity detected in the last %v seconds.", int(heartbeatInterval))
+					logger.Infof("Activity type:\n")
+					for activityType, times := range heartbeat.ActivityMap {
+						logger.Infof("activityType : %v times: %v\n", activityType, len(times))
+						if activityType == activity.MachineSleep {
+							isSystemSleeping = true
+						} else if activityType == activity.MachineWake {
+							isSystemSleeping = false
+						}
+					}
+					logger.Infof("\n\n\n")
 				}
 			case <-m.quit:
 				logger.Infof("stopping mouse mover")
@@ -132,7 +142,9 @@ func (m *MouseMover) Quit() {
 	if m != nil && m.isRunning() {
 		m.quit <- struct{}{}
 	}
-	m.logFile.Close()
+	if m.logFile != nil {
+		m.logFile.Close()
+	}
 }
 
 //GetInstance gets the singleton instance for mouse mover app
