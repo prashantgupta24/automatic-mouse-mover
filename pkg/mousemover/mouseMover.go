@@ -47,7 +47,10 @@ func (m *MouseMover) Start() {
 	}
 
 	heartbeatCh := activityTracker.Start()
+	run(heartbeatCh, m)
+}
 
+func run(heartbeatCh chan *tracker.Heartbeat, m *MouseMover) {
 	go func(m *MouseMover) {
 		logger := getLogger(m, false) //set writeToFile=true only for debugging
 		m.updateRunningStatus(true)
