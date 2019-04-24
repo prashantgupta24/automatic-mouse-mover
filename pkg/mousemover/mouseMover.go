@@ -26,7 +26,8 @@ type MouseMover struct {
 
 const (
 	timeout     = 100 //ms
-	logFileName = "log/logFile-amm-1"
+	logDir      = "log"
+	logFileName = "logFile-amm-1"
 )
 
 //Start the main app
@@ -162,7 +163,17 @@ func getLogger(m *MouseMover, doWriteToFile bool) *log.Logger {
 	}
 
 	if doWriteToFile {
-		logFile, err := os.OpenFile(logFileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		_, err := os.Stat(logDir)
+		if err != nil {
+			if os.IsNotExist(err) {
+				err = os.Mkdir(logDir, os.ModePerm)
+				if err != nil {
+					log.Fatalf("error creating dir: %v", err)
+				}
+			}
+		}
+
+		logFile, err := os.OpenFile(logDir+"/"+logFileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 		if err != nil {
 			log.Fatalf("error opening file: %v", err)
 		}
