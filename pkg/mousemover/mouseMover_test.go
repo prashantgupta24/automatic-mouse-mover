@@ -57,7 +57,7 @@ func (suite *TestMover) TestSingleton() {
 	assert.True(t, mouseMover2.state.isRunning(), "instance should have started")
 }
 
-func (suite *TestMover) TestSystemSleep() {
+func (suite *TestMover) TestSystemSleepAndWake() {
 	t := suite.T()
 	mouseMover := GetInstance()
 
@@ -69,15 +69,28 @@ func (suite *TestMover) TestSystemSleep() {
 
 	//fake a machine-sleep activity
 	machineSleepActivityMap := make(map[activity.Type][]time.Time)
-	var timeArray []time.Time
-	timeArray = append(timeArray, time.Now())
-	machineSleepActivityMap[activity.MachineSleep] = timeArray
+	var sleepTimeArray []time.Time
+	sleepTimeArray = append(sleepTimeArray, time.Now())
+	machineSleepActivityMap[activity.MachineSleep] = sleepTimeArray
 	heartbeatCh <- &tracker.Heartbeat{
 		WasAnyActivity: true,
 		ActivityMap:    machineSleepActivityMap,
 	}
 	time.Sleep(time.Millisecond * 500) //wait for it to be registered
 	assert.True(t, mouseMover.state.isSystemSleeping(), "machine should be sleeping now")
+
+	//fake a machine-wake activity
+	machineWakeActivityMap := make(map[activity.Type][]time.Time)
+	var wakeTimeArray []time.Time
+	wakeTimeArray = append(wakeTimeArray, time.Now())
+	machineWakeActivityMap[activity.MachineWake] = wakeTimeArray
+	heartbeatCh <- &tracker.Heartbeat{
+		WasAnyActivity: true,
+		ActivityMap:    machineWakeActivityMap,
+	}
+
+	time.Sleep(time.Millisecond * 500) //wait for it to be registered
+	assert.False(t, mouseMover.state.isSystemSleeping(), "machine should be awake now")
 }
 
 func (suite *TestMover) TestMouseMoveSuccess() {
