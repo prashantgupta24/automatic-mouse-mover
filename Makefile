@@ -1,6 +1,8 @@
 COVER_PROFILE=cover.out
 COVER_HTML=cover.html
 
+.PHONY: $(COVER_PROFILE) $(COVER_HTML)
+
 all: open
 
 build: clean
