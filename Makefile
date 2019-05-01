@@ -21,6 +21,8 @@ clean:
 start:
 	go run cmd/main.go
 
+test:coverage
+
 coverage: $(COVER_HTML)
 
 $(COVER_HTML): $(COVER_PROFILE)
@@ -33,7 +35,7 @@ vet:
 	go vet $(shell glide nv)
 
 lint:
-	go list ./... | grep -v vendor | xargs -L1 golint -set_exit_status
+	go list ./... | grep -v vendor | grep -v /assets/ |xargs -L1 golint -set_exit_status
 
 .PHONY: build 
 .PHONY: clean
