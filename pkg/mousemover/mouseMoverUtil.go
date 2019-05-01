@@ -2,6 +2,7 @@ package mousemover
 
 import (
 	"os"
+	"time"
 
 	"github.com/go-vgo/robotgo"
 	"github.com/sirupsen/logrus"
@@ -36,7 +37,11 @@ func getLogger(m *MouseMover, doWriteToFile bool) *log.Logger {
 	return logger
 }
 
-func moveAndCheck(movePixel int, mouseMoveSuccessCh chan bool) {
+func moveAndCheck(state *state, movePixel int, mouseMoveSuccessCh chan bool) {
+	if state.override != nil { //we don't want to move mouse for tests
+		mouseMoveSuccessCh <- state.override.valueToReturn
+		return
+	}
 	currentX, currentY := robotgo.GetMousePos()
 	moveToX := currentX + movePixel
 	moveToY := currentY + movePixel
@@ -52,13 +57,51 @@ func moveAndCheck(movePixel int, mouseMoveSuccessCh chan bool) {
 	}
 }
 
-func (m *MouseMover) isRunning() bool {
-	m.mutex.RLock()
-	defer m.mutex.RUnlock()
-	return m.runningStatus
+//getters and setters for state variable
+func (s *state) isRunning() bool {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.isAppRunning
 }
-func (m *MouseMover) updateRunningStatus(isRunning bool) {
-	m.mutex.Lock()
-	defer m.mutex.Unlock()
-	m.runningStatus = isRunning
+
+func (s *state) updateRunningStatus(isRunning bool) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.isAppRunning = isRunning
+}
+
+func (s *state) isSystemSleeping() bool {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.isSysSleeping
+}
+
+func (s *state) updateMachineSleepStatus(isSleeping bool) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.isSysSleeping = isSleeping
+}
+
+func (s *state) getLastMouseMovedTime() time.Time {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.lastMouseMovedTime
+}
+
+func (s *state) updateLastMouseMovedTime(time time.Time) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.lastMouseMovedTime = time
+}
+
+func (s *state) getDidNotMoveCount() int {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.didNotMoveCount
+}
+
+func (s *state) updateDidNotMoveCount(count int) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.didNotMoveCount = count
 }

@@ -1,3 +1,6 @@
+COVER_PROFILE=cover.out
+COVER_HTML=cover.html
+
 all: open
 
 build: clean
@@ -16,8 +19,13 @@ clean:
 start:
 	go run cmd/main.go
 
-test:
-	go test -v -race -failfast ./...
+coverage: $(COVER_HTML)
+
+$(COVER_HTML): $(COVER_PROFILE)
+	go tool cover -html=$(COVER_PROFILE) -o $(COVER_HTML)
+
+$(COVER_PROFILE):
+	go test -v -failfast -race -coverprofile=$(COVER_PROFILE) ./...
 
 vet:
 	go vet $(shell glide nv)

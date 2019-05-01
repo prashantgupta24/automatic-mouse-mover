@@ -2,8 +2,6 @@ package mousemover
 
 import (
 	"fmt"
-	"os"
-	"sync"
 	"time"
 
 	"github.com/go-vgo/robotgo"
@@ -13,14 +11,6 @@ import (
 
 var instance *MouseMover
 
-//MouseMover is the main struct for the app
-type MouseMover struct {
-	quit          chan struct{}
-	mutex         sync.RWMutex
-	runningStatus bool
-	logFile       *os.File
-}
-
 const (
 	timeout     = 100 //ms
 	logDir      = "log"
@@ -29,9 +19,10 @@ const (
 
 //Start the main app
 func (m *MouseMover) Start() {
-	if m.isRunning() {
+	if m.state.isRunning() {
 		return
 	}
+	m.state = &state{}
 	m.quit = make(chan struct{})
 
 	heartbeatInterval := 60 //value always in seconds
@@ -49,38 +40,40 @@ func (m *MouseMover) Start() {
 
 func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *tracker.Instance) {
 	go func() {
-		if m.isRunning() {
+		state := m.state
+		if state != nil && state.isRunning() {
 			return
 		}
+		state.updateRunningStatus(true)
+
 		logger := getLogger(m, false) //set writeToFile=true only for debugging
-		m.updateRunningStatus(true)
 		movePixel := 10
-		var lastMoved time.Time
-		isSystemSleeping := false
-		didNotMoveTimes := 0
+		// var lastMoved time.Time
+		// didNotMoveTimes := 0
 		for {
 			select {
 			case heartbeat := <-heartbeatCh:
 				if !heartbeat.WasAnyActivity {
-					if isSystemSleeping {
+					if state.isSystemSleeping() {
 						logger.Infof("system sleeping")
 						continue
 					}
 					mouseMoveSuccessCh := make(chan bool)
-					go moveAndCheck(movePixel, mouseMoveSuccessCh)
+					go moveAndCheck(state, movePixel, mouseMoveSuccessCh)
 					select {
 					case wasMouseMoveSuccess := <-mouseMoveSuccessCh:
 						if wasMouseMoveSuccess {
-							lastMoved = time.Now()
-							logger.Infof("moved mouse at : %v\n\n", lastMoved)
+							state.updateLastMouseMovedTime(time.Now())
+							logger.Infof("moved mouse at : %v\n\n", state.getLastMouseMovedTime())
 							movePixel *= -1
-							didNotMoveTimes = 0
+							state.updateDidNotMoveCount(0)
 						} else {
-							didNotMoveTimes++
+							didNotMoveCount := state.getDidNotMoveCount()
+							state.updateDidNotMoveCount(didNotMoveCount + 1)
 							msg := fmt.Sprintf("Mouse pointer cannot be moved at %v. Last moved at %v. Happened %v times. See README for details.",
-								time.Now(), lastMoved, didNotMoveTimes)
+								time.Now(), state.getLastMouseMovedTime(), state.getDidNotMoveCount())
 							logger.Errorf(msg)
-							if didNotMoveTimes >= 3 {
+							if state.getDidNotMoveCount() >= 3 {
 								go func() {
 									robotgo.ShowAlert("Error with Automatic Mouse Mover", msg)
 								}()
@@ -96,16 +89,16 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 					for activityType, times := range heartbeat.ActivityMap {
 						logger.Infof("activityType : %v times: %v\n", activityType, len(times))
 						if activityType == activity.MachineSleep {
-							isSystemSleeping = true
+							state.updateMachineSleepStatus(true)
 						} else if activityType == activity.MachineWake {
-							isSystemSleeping = false
+							state.updateMachineSleepStatus(false)
 						}
 					}
 					logger.Infof("\n\n\n")
 				}
 			case <-m.quit:
 				logger.Infof("stopping mouse mover")
-				m.updateRunningStatus(false)
+				state.updateRunningStatus(false)
 				activityTracker.Quit()
 				return
 			}
@@ -116,7 +109,7 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 //Quit the app
 func (m *MouseMover) Quit() {
 	//making it idempotent
-	if m != nil && m.isRunning() {
+	if m != nil && m.state.isRunning() {
 		m.quit <- struct{}{}
 	}
 	if m.logFile != nil {
@@ -127,7 +120,9 @@ func (m *MouseMover) Quit() {
 //GetInstance gets the singleton instance for mouse mover app
 func GetInstance() *MouseMover {
 	if instance == nil {
-		instance = &MouseMover{}
+		instance = &MouseMover{
+			state: &state{},
+		}
 	}
 	return instance
 }
