@@ -1,7 +1,7 @@
 ## Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
 ![GitHub release](https://img.shields.io/github/release/prashantgupta24/automatic-mouse-mover.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link]
+[![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link] [![codecov](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover)
 
 
 Ever felt the need to keep your machine awake without having to resort to the age-old methods of installing an app that you don't trust or playing a video? **Well, not anymore!**
