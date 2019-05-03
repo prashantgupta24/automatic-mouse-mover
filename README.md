@@ -1,7 +1,8 @@
 ## Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
 ![GitHub release](https://img.shields.io/github/release/prashantgupta24/automatic-mouse-mover.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover)
+[![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link]
+
 
 Ever felt the need to keep your machine awake without having to resort to the age-old methods of installing an app that you don't trust or playing a video? **Well, not anymore!**
 
@@ -38,3 +39,6 @@ If you still see the error, try to quit and start the app again (the age-old way
 Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track the various changes that happened in your system during that time, like cursor movement, mouse clicks, screen changes etc. Whenever `AMM` detects a change in the system, it knows that the system is busy and will not do anything. If not, it moves the mouse cursor ever so slightly, enough to keep your Mac awake for eternity.
 
 > All code is public and open-sourced so no worrying if there's nefarious intention involved in recording your activity or not.
+
+[godoc-badge]: https://img.shields.io/badge/godoc-reference-blue.svg
+[godoc-link]: https://godoc.org/github.com/prashantgupta24/automatic-mouse-mover/pkg/mousemover
