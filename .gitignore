@@ -1,3 +1,7 @@
 vendor/
 bin/
 log/
+
+# coverage
+*.html
+*.out
