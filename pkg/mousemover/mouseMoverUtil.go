@@ -9,7 +9,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func getLogger(m *MouseMover, doWriteToFile bool) *log.Logger {
+func getLogger(m *MouseMover, doWriteToFile bool, filename string) *log.Logger {
 	logger := log.New()
 	logger.Formatter = &logrus.TextFormatter{
 		FullTimestamp: true,
@@ -26,7 +26,7 @@ func getLogger(m *MouseMover, doWriteToFile bool) *log.Logger {
 			}
 		}
 
-		logFile, err := os.OpenFile(logDir+"/"+logFileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		logFile, err := os.OpenFile(logDir+"/"+filename, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 		if err != nil {
 			log.Fatalf("error opening file: %v", err)
 		}

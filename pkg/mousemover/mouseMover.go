@@ -46,10 +46,8 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 		}
 		state.updateRunningStatus(true)
 
-		logger := getLogger(m, false) //set writeToFile=true only for debugging
+		logger := getLogger(m, false, logFileName) //set writeToFile=true only for debugging
 		movePixel := 10
-		// var lastMoved time.Time
-		// didNotMoveTimes := 0
 		for {
 			select {
 			case heartbeat := <-heartbeatCh:

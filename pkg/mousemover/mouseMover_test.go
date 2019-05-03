@@ -1,6 +1,7 @@
 package mousemover
 
 import (
+	"os"
 	"testing"
 	"time"
 
@@ -57,11 +58,29 @@ func (suite *TestMover) TestSingleton() {
 	assert.True(t, mouseMover2.state.isRunning(), "instance should have started")
 }
 
+func (suite *TestMover) TestLogFile() {
+	t := suite.T()
+	mouseMover := GetInstance()
+	logFileName := "test1"
+
+	getLogger(mouseMover, true, logFileName)
+
+	filePath := logDir + "/" + logFileName
+	assert.FileExists(t, filePath, "log file should exist")
+	os.RemoveAll(filePath)
+}
 func (suite *TestMover) TestSystemSleepAndWake() {
 	t := suite.T()
 	mouseMover := GetInstance()
 
+	state := &state{
+		override: &override{
+			valueToReturn: true,
+		},
+	}
+	mouseMover.state = state
 	heartbeatCh := make(chan *tracker.Heartbeat)
+
 	mouseMover.run(heartbeatCh, suite.activityTracker)
 	time.Sleep(time.Millisecond * 500) //wait for app to start
 	assert.True(t, mouseMover.state.isRunning(), "instance should have started")
@@ -78,6 +97,15 @@ func (suite *TestMover) TestSystemSleepAndWake() {
 	}
 	time.Sleep(time.Millisecond * 500) //wait for it to be registered
 	assert.True(t, mouseMover.state.isSystemSleeping(), "machine should be sleeping now")
+
+	//assert app is sleeping
+	heartbeatCh <- &tracker.Heartbeat{
+		WasAnyActivity: false,
+	}
+
+	time.Sleep(time.Millisecond * 500) //wait for it to be registered
+	assert.True(t, time.Time.IsZero(state.getLastMouseMovedTime()), "should be default but is ", state.getLastMouseMovedTime())
+	assert.Equal(t, state.getDidNotMoveCount(), 0, "should be 0")
 
 	//fake a machine-wake activity
 	machineWakeActivityMap := make(map[activity.Type][]time.Time)
