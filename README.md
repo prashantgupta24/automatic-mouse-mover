@@ -1,6 +1,6 @@
 ## Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
-![GitHub release](https://img.shields.io/github/release/prashantgupta24/automatic-mouse-mover.svg)
+[![version][version-badge]][RELEASES]![GitHub release]()
 [![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link] [![codecov](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover)
 
 
@@ -39,6 +39,9 @@ If you still see the error, try to quit and start the app again (the age-old way
 Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24/activity-tracker) to track the various changes that happened in your system during that time, like cursor movement, mouse clicks, screen changes etc. Whenever `AMM` detects a change in the system, it knows that the system is busy and will not do anything. If not, it moves the mouse cursor ever so slightly, enough to keep your Mac awake for eternity.
 
 > All code is public and open-sourced so no worrying if there's nefarious intention involved in recording your activity or not.
+
+[version-badge]: https://img.shields.io/github/release/prashantgupta24/automatic-mouse-mover.svg
+[RELEASES]: https://github.com/prashantgupta24/automatic-mouse-mover/releases
 
 [godoc-badge]: https://img.shields.io/badge/godoc-reference-blue.svg
 [godoc-link]: https://godoc.org/github.com/prashantgupta24/automatic-mouse-mover/pkg/mousemover
