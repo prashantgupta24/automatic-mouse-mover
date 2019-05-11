@@ -14,7 +14,7 @@ var instance *MouseMover
 const (
 	timeout     = 100 //ms
 	logDir      = "log"
-	logFileName = "logFile-amm-2"
+	logFileName = "logFile-amm-3"
 )
 
 //Start the main app
@@ -88,7 +88,7 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 						logger.Infof("activityType : %v times: %v\n", activityType, len(times))
 						if activityType == activity.MachineSleep {
 							state.updateMachineSleepStatus(true)
-						} else if activityType == activity.MachineWake {
+						} else {
 							state.updateMachineSleepStatus(false)
 						}
 					}
