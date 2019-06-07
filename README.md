@@ -3,13 +3,24 @@
 [![version][version-badge]][RELEASES] [![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link] [![codecov](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover)
 
 
-Ever felt the need to keep your machine awake without having to resort to the age-old methods of installing an app that you don't trust or playing a video? **Well, not anymore!**
+Ever felt the need to keep your machine awake without having to resort to the age-old methods of installing an app that hinders with your mac's sleep mechanism or playing a never-ending video? **Well, not anymore!**
 
 Introducing the simplest app on the market that has the sole purpose of **moving your mouse pointer at regular intervals so that your machine never sleeps!** And best of all, it works **ONLY** when you are not working, so be rest assured that the mouse won't start moving on its own without the machine actually being idle.
 
+## How I use it
+I always have this app working in the background for me whenever I work from home, so that I can take a break from work, strech my legs, go for a short walk, come back and still have my slack open! (not having to type in my password every time is awesome).
+
+Also if I need to go out for longer, I just close the lid, and off goes my mac to sleep!
+
+## How it's different from other apps
+
+Apps like `Caffeine` perform similar tasks, but the main difference is that **this app will let your mac sleep normally in events of closing the lid or pressing the power button to make it sleep. Other apps hinder with these functionalities.**
+
+So if you want something that will keep your mac awake as long as you are working and will sleep when you close the lid, then this is for you!
+
 ## Demo
 
-You just click on `Start`, and AMM will take care of moving your mouse whenever it feels that the system has been left idle for a long time. It's as simple as this. 
+You just click on `Start`, and AMM will take care of moving your mouse whenever it feels that the system has been left idle for a minute. It's as simple as this. 
 
 ![](https://github.com/prashantgupta24/automatic-mouse-mover/blob/master/resources/amm-demo.gif)
 
