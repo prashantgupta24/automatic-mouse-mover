@@ -14,7 +14,7 @@ var instance *MouseMover
 const (
 	timeout     = 100 //ms
 	logDir      = "log"
-	logFileName = "logFile-amm-3"
+	logFileName = "logFile-amm-5"
 )
 
 //Start the main app
@@ -62,7 +62,7 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 					case wasMouseMoveSuccess := <-mouseMoveSuccessCh:
 						if wasMouseMoveSuccess {
 							state.updateLastMouseMovedTime(time.Now())
-							logger.Infof("moved mouse at : %v\n\n", state.getLastMouseMovedTime())
+							logger.Infof("Is system sleeping? : %v : moved mouse at : %v\n\n", state.isSystemSleeping(), state.getLastMouseMovedTime())
 							movePixel *= -1
 							state.updateDidNotMoveCount(0)
 						} else {
@@ -88,6 +88,8 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 						logger.Infof("activityType : %v times: %v\n", activityType, len(times))
 						if activityType == activity.MachineSleep {
 							state.updateMachineSleepStatus(true)
+							logger.Infof("system sleep registered. Is system sleeping? : %v", state.isSystemSleeping())
+							break
 						} else {
 							state.updateMachineSleepStatus(false)
 						}
