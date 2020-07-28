@@ -28,7 +28,7 @@ You just click on `Start`, and AMM will take care of moving your mouse whenever 
 
 ### Install from binary
 
-1. Download the latest `amm.app.zip` from the releases page, unzip it, and copy the .app to your `Applications` folder like any other application.
+1. Download the latest `amm.app.zip` from the [releases](https://github.com/prashantgupta24/automatic-mouse-mover/releases) page, unzip it, and copy the .app to your `Applications` folder like any other application.
 
 1. Since the application is not notarized, you will need to right click on the .app and choose Open.
 
