@@ -1,22 +1,48 @@
-## Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
+# Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
 [![version][version-badge]][releases] [![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link] [![codecov](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover)
 
-Ever felt the need to keep your machine awake without having to resort to the age-old methods of installing an app that hinders with your mac's sleep mechanism or playing a never-ending video? **Well, not anymore!**
+Ever felt the need to keep your machine awake without actually having to move the mouse pointer manually at regular intervals? **Well, not anymore!**
 
-Introducing the simplest app on the market that has the sole purpose of **moving your mouse pointer at regular intervals so that your machine never sleeps!** And best of all, it works **ONLY** when you are not working, so be rest assured that the mouse won't start moving on its own without the machine actually being idle.
+Introducing the simplest app that has the sole purpose of **moving your mouse pointer at regular intervals so that your machine is kept awake!** And best of all, it works **ONLY** when you are not working, so be rest assured that the mouse won't start moving on its own without the machine actually being idle.
 
-## How I use it
+**Table of contents**
 
-I always have this app working in the background for me whenever I work from home, so that I can take a break from work, strech my legs, go for a short walk, come back and still have my slack open! (not having to type in my password every time is awesome).
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 
-Also if I need to go out for longer, I just close the lid, and off goes my mac to sleep!
+<!-- code_chunk_output -->
+
+- [How it's different from other apps](#how-its-different-from-other-apps)
+- [How I use it](#how-i-use-it)
+  - [Work from home benefit](#work-from-home-benefit)
+- [Demo](#demo)
+- [How to install](#how-to-install)
+  - [Install from binary](#install-from-binary)
+  - [Install from source](#install-from-source)
+- [Granting access for moving the mouse cursor](#granting-access-for-moving-the-mouse-cursor)
+- [How it works](#how-it-works)
+
+<!-- /code_chunk_output -->
 
 ## How it's different from other apps
 
-Apps like `Caffeine` perform similar tasks, but the main difference is that **this app will let your mac sleep normally in events of closing the lid or pressing the power button to make it sleep. Other apps hinder with these functionalities.**
+The main difference between this app and other apps is that this app **keeps your machine awake**, whereas other apps keep your machine from going to sleep. Let me explain.
 
-So if you want something that will keep your mac awake as long as you are working and will sleep when you close the lid, then this is for you!
+If you use a messaging app like Slack, they are programmed to automatically change your status to `Away` when you don't interact with your machine for a certain amount of time. Apps which keep your machine from going to sleep will not be able to stop that. This app will prevent that, since **it is actively keeping your machine awake by moving the mouse pointer**.
+
+**This comes very close to simulating an actual user using the machine, which the other apps cannot do.**
+
+So if you want something that will keep your mac awake as long as you don't manually put it to sleep, then this is for you!
+
+## How I use it
+
+I always have this app working in the background for me whenever I work from home, so that I can take a break from work, strech my legs, go for a short walk, come back and still have my slack open and set to active! (not having to type in my password every time is awesome, for machines without fingerprint sensors anyway).
+
+Also if I need to go out for longer, I just close the lid, and off goes my mac to sleep!
+
+### Work from home benefit
+
+Since this app actively keeps your machine awake, your messaging app will never go on idle and put your status as `Away`.
 
 ## Demo
 
