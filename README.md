@@ -92,3 +92,7 @@ Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24
 [releases]: https://github.com/prashantgupta24/automatic-mouse-mover/releases
 [godoc-badge]: https://img.shields.io/badge/godoc-reference-blue.svg
 [godoc-link]: https://godoc.org/github.com/prashantgupta24/automatic-mouse-mover/pkg/mousemover
+
+## Contributions welcome!
+
+Please feel free to contribute and make this open source app even better! Adding more pluggable activities to [Activity tracker](https://github.com/prashantgupta24/activity-tracker) will make sure that AMM works even better!
