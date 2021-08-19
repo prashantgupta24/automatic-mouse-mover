@@ -31,7 +31,7 @@ func (m *MouseMover) Start() {
 	activityTracker := &tracker.Instance{
 		HeartbeatInterval: heartbeatInterval,
 		WorkerInterval:    workerInterval,
-		//LogLevel:  "debug", //if we want verbose logging
+		// LogLevel:          "debug", //if we want verbose logging
 	}
 
 	heartbeatCh := activityTracker.Start()
@@ -71,7 +71,7 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 							msg := fmt.Sprintf("Mouse pointer cannot be moved at %v. Last moved at %v. Happened %v times. See README for details.",
 								time.Now(), state.getLastMouseMovedTime(), state.getDidNotMoveCount())
 							logger.Errorf(msg)
-							if state.getDidNotMoveCount() >= 3 {
+							if state.getDidNotMoveCount() >= 10 {
 								go func() {
 									robotgo.ShowAlert("Error with Automatic Mouse Mover", msg)
 								}()
