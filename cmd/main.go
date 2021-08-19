@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/go-vgo/robotgo"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/getlantern/systray"
@@ -15,6 +16,8 @@ func main() {
 func onReady() {
 	go func() {
 		systray.SetIcon(icon.Data)
+		about := systray.AddMenuItem("About AMM", "Information about the app")
+		systray.AddSeparator()
 		ammStart := systray.AddMenuItem("Start", "start the app")
 		ammStop := systray.AddMenuItem("Stop", "stop the app")
 		ammStop.Disable()
@@ -23,6 +26,9 @@ func onReady() {
 		// Sets the icon of a menu item. Only available on Mac.
 		//mQuit.SetIcon(icon.Data)
 		mouseMover := mousemover.GetInstance()
+		mouseMover.Start()
+		ammStart.Disable()
+		ammStop.Enable()
 		for {
 			select {
 			case <-ammStart.ClickedCh:
@@ -43,6 +49,10 @@ func onReady() {
 				mouseMover.Quit()
 				systray.Quit()
 				return
+
+			case <-about.ClickedCh:
+				log.Infof("Requesting about")
+				robotgo.ShowAlert("Automatic-mouse-mover app", "Developed by Prashant Gupta. \n\nMore info at: https://github.com/prashantgupta24/automatic-mouse-mover")
 			}
 		}
 
