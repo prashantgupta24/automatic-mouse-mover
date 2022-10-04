@@ -19,6 +19,7 @@ type state struct {
 	isAppRunning       bool
 	isSysSleeping      bool
 	lastMouseMovedTime time.Time
+	lastErrorTime      time.Time
 	didNotMoveCount    int
 	override           *override
 }

@@ -94,6 +94,18 @@ func (s *state) updateLastMouseMovedTime(time time.Time) {
 	s.lastMouseMovedTime = time
 }
 
+func (s *state) getLastErrorTime() time.Time {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.lastErrorTime
+}
+
+func (s *state) updateLastErrorTime(time time.Time) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.lastErrorTime = time
+}
+
 func (s *state) getDidNotMoveCount() int {
 	s.mutex.RLock()
 	defer s.mutex.RUnlock()
