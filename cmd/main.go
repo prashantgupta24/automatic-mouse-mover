@@ -52,7 +52,7 @@ func onReady() {
 
 			case <-about.ClickedCh:
 				log.Infof("Requesting about")
-				robotgo.ShowAlert("Automatic-mouse-mover app v1.1.0", "Developed by Prashant Gupta. \n\nMore info at: https://github.com/prashantgupta24/automatic-mouse-mover")
+				robotgo.ShowAlert("Automatic-mouse-mover app v1.2.0", "Developed by Prashant Gupta. \n\nMore info at: https://github.com/prashantgupta24/automatic-mouse-mover")
 			}
 		}
 
