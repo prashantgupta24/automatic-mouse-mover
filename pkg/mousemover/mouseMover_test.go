@@ -166,6 +166,7 @@ func (suite *TestMover) TestMouseMoveFailure() {
 	assert.False(t, state.isSystemSleeping(), "machine should not be sleeping")
 	assert.True(t, time.Time.IsZero(state.getLastMouseMovedTime()), "should be default")
 	assert.Equal(t, state.getDidNotMoveCount(), 0, "should be 0")
+	assert.True(t, state.getLastErrorTime().IsZero(), "should be default")
 
 	heartbeatCh <- &tracker.Heartbeat{
 		WasAnyActivity: false,
@@ -174,4 +175,5 @@ func (suite *TestMover) TestMouseMoveFailure() {
 	time.Sleep(time.Millisecond * 500) //wait for it to be registered
 	assert.True(t, time.Time.IsZero(state.getLastMouseMovedTime()), "should be default but is ", state.getLastMouseMovedTime())
 	assert.NotEqual(t, state.getDidNotMoveCount(), 0, "should not be 0")
+	assert.NotEqual(t, state.getLastErrorTime(), 0, "should not be 0")
 }
