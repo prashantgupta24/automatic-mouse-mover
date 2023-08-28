@@ -22,7 +22,7 @@ func TestSuite(t *testing.T) {
 	suite.Run(t, new(TestMover))
 }
 
-//Run once before all tests
+// Run once before all tests
 func (suite *TestMover) SetupSuite() {
 	heartbeatInterval := 60
 	workerInterval := 10
@@ -35,7 +35,7 @@ func (suite *TestMover) SetupSuite() {
 	suite.heartbeatCh = make(chan *tracker.Heartbeat)
 }
 
-//Run once before each test
+// Run once before each test
 func (suite *TestMover) SetupTest() {
 	instance = nil
 }
