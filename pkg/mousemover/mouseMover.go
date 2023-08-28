@@ -17,7 +17,7 @@ const (
 	logFileName = "logFile-amm-5"
 )
 
-//Start the main app
+// Start the main app
 func (m *MouseMover) Start() {
 	if m.state.isRunning() {
 		return
@@ -74,7 +74,7 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 							logger.Errorf(msg)
 							if state.getDidNotMoveCount() >= 10 && (time.Since(state.lastErrorTime).Hours() > 24) { //show only 1 error in a 24 hour window
 								go func() {
-									robotgo.ShowAlert("Error with Automatic Mouse Mover", msg)
+									robotgo.Alert("Error with Automatic Mouse Mover", msg)
 								}()
 							}
 						}
@@ -107,7 +107,7 @@ func (m *MouseMover) run(heartbeatCh chan *tracker.Heartbeat, activityTracker *t
 	}()
 }
 
-//Quit the app
+// Quit the app
 func (m *MouseMover) Quit() {
 	//making it idempotent
 	if m != nil && m.state.isRunning() {
@@ -118,7 +118,7 @@ func (m *MouseMover) Quit() {
 	}
 }
 
-//GetInstance gets the singleton instance for mouse mover app
+// GetInstance gets the singleton instance for mouse mover app
 func GetInstance() *MouseMover {
 	if instance == nil {
 		instance = &MouseMover{

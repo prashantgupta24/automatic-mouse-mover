@@ -45,7 +45,7 @@ func moveAndCheck(state *state, movePixel int, mouseMoveSuccessCh chan bool) {
 	currentX, currentY := robotgo.GetMousePos()
 	moveToX := currentX + movePixel
 	moveToY := currentY + movePixel
-	robotgo.MoveMouse(moveToX, moveToY)
+	robotgo.Move(moveToX, moveToY)
 
 	//check if mouse moved. Sometimes mac users need to give
 	//extra permission for controlling the mouse
@@ -57,7 +57,7 @@ func moveAndCheck(state *state, movePixel int, mouseMoveSuccessCh chan bool) {
 	}
 }
 
-//getters and setters for state variable
+// getters and setters for state variable
 func (s *state) isRunning() bool {
 	s.mutex.RLock()
 	defer s.mutex.RUnlock()
