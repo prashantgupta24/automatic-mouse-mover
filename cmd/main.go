@@ -31,7 +31,16 @@ func getIcon(iconName string, active bool) []byte {
 	if iconName != "mouse" && iconName != "cloud" && iconName != "geometric" && iconName != "man" {
 		iconName = "mouse"
 	}
-	b, err := os.ReadFile("../assets/icon/" + iconName + ".png")
+	var b []byte
+	var err error
+	ex, _ := os.Executable()
+	exPath := filepath.Dir(ex)
+
+	if _, err := os.Stat(exPath + "/../Resources/assets/icon"); os.IsNotExist(err) {
+		b, err = os.ReadFile(exPath + "/../assets/icon/" + iconName + ".png")
+	} else {
+		b, err = os.ReadFile(exPath + "/../Resources/assets/icon/" + iconName + ".png")
+	}
 	if err != nil {
 		panic(err)
 	}
