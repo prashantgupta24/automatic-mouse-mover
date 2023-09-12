@@ -1,6 +1,6 @@
 module github.com/prashantgupta24/automatic-mouse-mover
 
-go 1.21.0
+go 1.21
 
 require (
 	github.com/deckarep/gosx-notifier v0.0.0-20180201035817-e127226297fb
