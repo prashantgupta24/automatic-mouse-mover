@@ -1,3 +1,5 @@
+**Note: Known issues with MacOS Sonoma, will work on a fix asap**
+
 # Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
 [![version][version-badge]][releases] [![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link] [![codecov](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover)
