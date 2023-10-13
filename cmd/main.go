@@ -132,7 +132,7 @@ func onReady() {
 				setIcon("geometric", configFile)
 			case <-about.ClickedCh:
 				log.Infof("Requesting about")
-				robotgo.Alert("Automatic-mouse-mover app v1.2.0", "Developed by Prashant Gupta. \n\nMore info at: https://github.com/prashantgupta24/automatic-mouse-mover", "OK", "")
+				robotgo.Alert("Automatic-mouse-mover app v1.3.0", "Developed by Prashant Gupta. \n\nMore info at: https://github.com/prashantgupta24/automatic-mouse-mover", "OK", "")
 			}
 		}
 
