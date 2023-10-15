@@ -6,10 +6,11 @@ COVER_HTML=cover.html
 all: open
 
 build: clean
-	mkdir -p -v ./bin/amm.app/Contents/Resources
+	mkdir -p -v ./bin/amm.app/Contents/Resources/assets/icon
 	mkdir -p -v ./bin/amm.app/Contents/MacOS
 	cp ./appInfo/*.plist ./bin/amm.app/Contents/Info.plist
 	cp ./appInfo/*.icns ./bin/amm.app/Contents/Resources/icon.icns
+	cp ./assets/icon/* ./bin/amm.app/Contents/Resources/assets/icon
 	go build -o ./bin/amm.app/Contents/MacOS/amm cmd/main.go
 
 open: build
