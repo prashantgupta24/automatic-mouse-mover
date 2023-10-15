@@ -1,6 +1,7 @@
 module github.com/prashantgupta24/automatic-mouse-mover
 
 go 1.21.0
+
 toolchain go1.21.3
 
 require (
