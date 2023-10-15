@@ -117,6 +117,7 @@ func onReady() {
 
 		icons := systray.AddMenuItem("Icons", "icon of the app")
 		mouse := icons.AddSubMenuItem("Mouse", "Mouse icon")
+
 		mouse.SetIcon(getIcon("mouse", false))
 		cloud := icons.AddSubMenuItem("Cloud", "Cloud icon")
 		cloud.SetIcon(getIcon("cloud", false))
@@ -168,7 +169,7 @@ func onReady() {
 				setIcon("geometric", configFile, &settings, ammStart.Disabled())
 			case <-about.ClickedCh:
 				log.Infof("Requesting about")
-				robotgo.Alert("Automatic-mouse-mover app v1.2.0", "Developed by Prashant Gupta. \n\nMore info at: https://github.com/prashantgupta24/automatic-mouse-mover", "OK", "")
+				robotgo.Alert("Automatic-mouse-mover app v1.3.1", "Developed by Prashant Gupta. \n\nMore info at: https://github.com/prashantgupta24/automatic-mouse-mover", "OK", "")
 			}
 		}
 
