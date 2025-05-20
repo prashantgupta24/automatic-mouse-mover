@@ -1,3 +1,8 @@
+
+## Stable build. Might not be willing to add anything new unless something breaks with macOS versions.
+
+I would like to keep this app as simple as possible. Hence I will not be adding more functionality to it. Feel free to fork it and add your own. Thanks for everyone who contributed in making it awesome!
+
 # Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
 [![version][version-badge]][releases] [![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/automatic-mouse-mover)](https://goreportcard.com/report/github.com/prashantgupta24/automatic-mouse-mover) [![godoc-badge][godoc-badge]][godoc-link] [![codecov](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/automatic-mouse-mover)
@@ -92,7 +97,3 @@ Every 60 seconds, AMM uses [Activity tracker](https://github.com/prashantgupta24
 [releases]: https://github.com/prashantgupta24/automatic-mouse-mover/releases
 [godoc-badge]: https://img.shields.io/badge/godoc-reference-blue.svg
 [godoc-link]: https://godoc.org/github.com/prashantgupta24/automatic-mouse-mover/pkg/mousemover
-
-## Contributions welcome!
-
-Please feel free to contribute and make this open source app even better! Adding more pluggable activities to [Activity tracker](https://github.com/prashantgupta24/activity-tracker) will make sure that AMM works even better!
