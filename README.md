@@ -1,7 +1,9 @@
 
 ## Stable build. Might not be willing to add anything new unless something breaks with macOS versions.
 
-I would like to keep this app as simple as possible. Hence I will not be adding more functionality to it. Feel free to fork it and add your own. Thanks for everyone who contributed in making it awesome!
+I would like to keep this app as simple as possible. Hence I will not be adding more functionality to it. Thanks for everyone who contributed in making it awesome!
+
+If you would like new features, feel free to check out: https://github.com/Resousse/automatic-mouse-mover
 
 # Presenting the minimalistic Automatic-Mouse-Mover(AMM) app!
 
